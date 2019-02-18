@@ -11,7 +11,7 @@
     <Canvas>
         <Rectangle Width="{Binding ActualWidth}" Height="{Binding ActualHeight}" x:Name="hueRectangle">
             <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
                     <LinearGradientBrush.GradientStops>
                         <GradientStop Color="#FF0000" Offset="0" />
                         <GradientStop Color="#FFFF00" Offset="0.167" />
