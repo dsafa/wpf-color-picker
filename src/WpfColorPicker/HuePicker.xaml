@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:WpfColorPicker"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="50"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Background="Black">
-    <Canvas>
-        <Rectangle Width="{Binding ActualWidth}" Height="{Binding ActualHeight}" x:Name="hueRectangle">
+    <DockPanel LastChildFill="True">
+        <Rectangle Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
+                   Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
+                   x:Name="hueRectangle">
             <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Name="hueGradients">
                     <LinearGradientBrush.GradientStops>
                         <GradientStop Color="#FF0000" Offset="0" />
                         <GradientStop Color="#FFFF00" Offset="0.167" />
@@ -24,5 +25,5 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-    </Canvas>
+    </DockPanel>
 </UserControl>

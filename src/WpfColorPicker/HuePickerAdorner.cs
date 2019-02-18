@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace WpfColorPicker
 {
-    class HuePickerAdorner : Adorner
+    internal class HuePickerAdorner : Adorner
     {
         private static readonly DependencyProperty VerticalPercentProperty =
             DependencyProperty.Register(nameof(VerticalPercent), typeof(double), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));

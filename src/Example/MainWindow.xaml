@@ -6,13 +6,20 @@
         xmlns:local="clr-namespace:Example"
         xmlns:color="clr-namespace:WpfColorPicker;assembly=WpfColorPicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        x:Name="mainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
-        <color:SaturationBrightnessPicker Grid.Column="0"/>
-        <color:HuePicker Grid.Column="1"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <color:SaturationBrightnessPicker Grid.Column="0" SelectedColor="{Binding C, ElementName=mainWindow}"/>
+        <color:HuePicker x:Name="hp" Grid.Column="1" SelectedColor="{Binding C, ElementName=mainWindow}"/>
+        <Label Grid.Row="1" Content="{Binding C, Mode=TwoWay, ElementName=mainWindow}"></Label>
     </Grid>
 </Window>

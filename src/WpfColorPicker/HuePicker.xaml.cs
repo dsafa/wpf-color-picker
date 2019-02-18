@@ -21,30 +21,15 @@ namespace WpfColorPicker
     /// </summary>
     public partial class HuePicker : UserControl
     {
-        private static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(HuePicker));
+        private static readonly DependencyProperty SelectedColorProperty
+            = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(HuePicker), new PropertyMetadata(Colors.Red, OnSelectedColorChanged));
         private readonly HuePickerAdorner _adorner;
-        private byte[] _pixels;
-        private int _stride;
-        private MemoryStream _ms;
 
         public HuePicker()
         {
             InitializeComponent();
             _adorner = new HuePickerAdorner(hueRectangle);
             Loaded += HuePickerOnLoaded;
-            SizeChanged += HuePickerOnSizeChanged;
-        }
-
-        private void HuePickerOnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)ActualWidth, (int)ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(this);
-        }
-
-        private void HuePickerOnLoaded(object sender, RoutedEventArgs e)
-        {
-            AdornerLayer.GetAdornerLayer(this).Add(_adorner);
-            Snapshot();
         }
 
         public Color SelectedColor
@@ -71,53 +56,41 @@ namespace WpfColorPicker
             UpdateAdorner(e.GetPosition(this));
         }
 
-        protected override void OnRender(DrawingContext drawingContext)
+        private static void OnSelectedColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            base.OnRender(drawingContext);
-            Snapshot();
+            var huePicker = (HuePicker)o;
+            huePicker.UpdateAdorner((Color)e.NewValue);
+        }
+
+        private void UpdateAdorner(Color color)
+        {
+            double hue = color.GetHue();
+            double percent = hue / 360;
+
+            // Make it so that the arrow doesn't jump back to the top when it goes to the bottom
+            Point mousePos = Mouse.GetPosition(this);
+            if (percent == 0 && ActualHeight - mousePos.Y < 1)
+            {
+                percent = 1;
+            }
+
+            _adorner.VerticalPercent = percent;
+            _adorner.Color = color;
         }
 
         private void UpdateAdorner(Point mousePos)
         {
-            _adorner.VerticalPercent = mousePos.Y / ActualHeight;
-            _adorner.Color = GetColor((int)mousePos.Y);
+            double verticalPercent = mousePos.Y / ActualHeight;
+            _adorner.VerticalPercent = verticalPercent;
+
+            Color c = hueGradients.GradientStops.GetColorAtOffset(verticalPercent);
+            _adorner.Color = c;
+            SelectedColor = c;
         }
 
-        private void Snapshot()
+        private void HuePickerOnLoaded(object sender, RoutedEventArgs e)
         {
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)ActualWidth, (int)ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(hueRectangle);
-
-            _ms?.Dispose();
-            _ms = new MemoryStream();
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(rtb));
-            encoder.Save(_ms);
-
-            var imageSource = new BitmapImage();
-            imageSource.BeginInit();
-            imageSource.StreamSource = _ms;
-            imageSource.EndInit();
-
-            _stride = imageSource.PixelWidth * 4;
-            int size = imageSource.PixelHeight * _stride;
-            _pixels = new byte[size];
-            imageSource.CopyPixels(_pixels, _stride, 0);
-        }
-
-        private Color GetColor(int y)
-        {
-            if (_pixels == null)
-            {
-                return Colors.Red;
-            }
-
-            int index = y * _stride;
-            var b = _pixels[index];
-            var g = _pixels[index + 1];
-            var r = _pixels[index + 2];
-            var a = _pixels[index + 3];
-            return Color.FromArgb(a, r, g, b);
+            AdornerLayer.GetAdornerLayer(this).Add(_adorner);
         }
     }
 }
