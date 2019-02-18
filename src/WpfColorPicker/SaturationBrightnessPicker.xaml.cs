@@ -61,6 +61,8 @@ namespace WpfColorPicker
         private void SaturationBrightnessPickerOnLoaded(object sender, RoutedEventArgs e)
         {
             AdornerLayer.GetAdornerLayer(this).Add(_adorner);
+            _adorner.IsClipEnabled = true;
+            _adorner.Position = new Point(ActualWidth, 0);
         }
 
         private void UpdateAdorner(Point p)
