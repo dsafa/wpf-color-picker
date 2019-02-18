@@ -51,6 +51,7 @@
     <Compile Include="HuePicker.xaml.cs">
       <DependentUpon>HuePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HuePickerAdorner.cs" />
     <Compile Include="SaturationBrightnessPicker.xaml.cs">
       <DependentUpon>SaturationBrightnessPicker.xaml</DependentUpon>
     </Compile>

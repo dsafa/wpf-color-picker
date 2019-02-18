@@ -9,7 +9,7 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Background="Black">
     <Canvas>
-        <Rectangle Width="{Binding ActualWidth}" Height="{Binding ActualHeight}">
+        <Rectangle Width="{Binding ActualWidth}" Height="{Binding ActualHeight}" x:Name="hueRectangle">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <LinearGradientBrush.GradientStops>
