@@ -17,7 +17,7 @@ namespace WpfColorPicker
         private static readonly DependencyProperty ColorProperty =
             DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
 
-        private static readonly Pen Pen = new Pen(Brushes.Black, 2);
+        private static readonly Pen Pen = new Pen(Brushes.Black, 3);
         private const double RectHeight = 15;
         private const double WidthOverhang = 5;
         private Brush _brush = Brushes.Red;
