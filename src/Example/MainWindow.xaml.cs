@@ -50,12 +50,5 @@ namespace Example
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
         }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            base.OnRender(drawingContext);
-
-            var c = hp.SelectedColor;
-        }
     }
 }

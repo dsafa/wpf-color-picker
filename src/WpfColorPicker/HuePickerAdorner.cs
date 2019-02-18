@@ -18,8 +18,8 @@ namespace WpfColorPicker
             DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
 
         private static readonly Pen Pen = new Pen(Brushes.Black, 2);
-        private const double TriangleLength = 20;
-        private const double X = 5;
+        private const double RectHeight = 15;
+        private const double WidthOverhang = 5;
         private Brush _brush = Brushes.Red;
 
         public HuePickerAdorner(UIElement adornedElement)
@@ -51,22 +51,12 @@ namespace WpfColorPicker
             var adornedElementRect = new Rect(AdornedElement.DesiredSize);
             var y = adornedElementRect.Height * VerticalPercent;
 
-            var leftTriGeometry = new StreamGeometry();
-            using (var geometryContext = leftTriGeometry.Open())
-            {
-                geometryContext.BeginFigure(new Point(-X, y + TriangleLength / 2), true, true);
-                geometryContext.LineTo(new Point(-X + TriangleLength, y), true, false);
-                geometryContext.LineTo(new Point(-X, y - TriangleLength / 2), true, false);
-            }
+            var topleftx = -WidthOverhang;
+            var toplefty =  y -RectHeight / 2;
+            var width = adornedElementRect.Width + 2 * WidthOverhang;
 
-            var rightTriGeometry = leftTriGeometry.Clone();
-            var transformGroup = new TransformGroup();
-            transformGroup.Children.Add(new TranslateTransform(-adornedElementRect.Width, 0));
-            transformGroup.Children.Add(new ScaleTransform(-1, 1));
-            rightTriGeometry.Transform = transformGroup;
+            drawingContext.DrawRoundedRectangle(_brush, Pen, new Rect(topleftx, toplefty, width, RectHeight), 2, 2);
 
-            drawingContext.DrawGeometry(_brush, Pen, leftTriGeometry);
-            drawingContext.DrawGeometry(_brush, Pen, rightTriGeometry);
         }
     }
 }

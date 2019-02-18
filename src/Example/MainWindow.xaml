@@ -10,16 +10,6 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         x:Name="mainWindow">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="60"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <color:SaturationBrightnessPicker Grid.Column="0" SelectedColor="{Binding C, ElementName=mainWindow}"/>
-        <color:HuePicker x:Name="hp" Grid.Column="1" SelectedColor="{Binding C, ElementName=mainWindow}"/>
-        <Label Grid.Row="1" Content="{Binding C, Mode=TwoWay, ElementName=mainWindow}"></Label>
+        <color:ColorPicker/>
     </Grid>
 </Window>
