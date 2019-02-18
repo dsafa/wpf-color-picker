@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfColorPicker", "WpfColorPicker.csproj", "{FF8583F8-B13F-4510-8164-A7B4DBF666AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "..\Example\Example.csproj", "{BF34857F-4096-49BB-92A0-B901B2FC1027}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FF8583F8-B13F-4510-8164-A7B4DBF666AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF8583F8-B13F-4510-8164-A7B4DBF666AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF8583F8-B13F-4510-8164-A7B4DBF666AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF34857F-4096-49BB-92A0-B901B2FC1027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF34857F-4096-49BB-92A0-B901B2FC1027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF34857F-4096-49BB-92A0-B901B2FC1027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF34857F-4096-49BB-92A0-B901B2FC1027}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

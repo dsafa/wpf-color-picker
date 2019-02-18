@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             x:Name="SaturationBrightnessPicker"
+             x:Name="saturationBrightnessPicker"
              Background="Black">
     <Canvas VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Rectangle Width="{Binding ActualWidth}" 
@@ -16,7 +16,7 @@
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                     <LinearGradientBrush.GradientStops>
                         <GradientStop Color="White" Offset="0" />
-                        <GradientStop Color="{Binding SelectedColor, ElementName=SaturationBrightnessPicker, Mode=OneWay}" Offset="1" />
+                        <GradientStop x:Name="hue" Color="{Binding SelectedColor, ElementName=saturationBrightnessPicker, Mode=OneWay}" Offset="1" />
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Rectangle.Fill>

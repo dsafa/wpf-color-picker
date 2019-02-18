@@ -17,8 +17,8 @@ namespace WpfColorPicker
 {
     public partial class SaturationBrightnessPicker : UserControl
     {
-        private static readonly DependencyProperty ColorProperty 
-            = DependencyProperty.Register(nameof(ColorProperty), typeof(Color), typeof(SaturationBrightnessPicker), new PropertyMetadata(Colors.White));
+        private static readonly DependencyProperty SelectedColorProperty 
+            = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(SaturationBrightnessPicker), new PropertyMetadata(Colors.White, new PropertyChangedCallback(OnSelectedColorChanged)));
 
         public SaturationBrightnessPicker()
         {
@@ -29,13 +29,19 @@ namespace WpfColorPicker
         {
             get
             {
-                return (Color)GetValue(ColorProperty);
+                return (Color)GetValue(SelectedColorProperty);
             }
 
             set
             {
-                SetValue(ColorProperty, value);
+                SetValue(SelectedColorProperty, value);
             }
+        }
+
+        private static void OnSelectedColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            var picker = (SaturationBrightnessPicker)o;
+            picker.hue.Color = (Color)e.NewValue;
         }
     }
 }
