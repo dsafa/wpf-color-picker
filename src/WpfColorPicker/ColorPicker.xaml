@@ -11,7 +11,8 @@
     <DockPanel>
         <local:SaturationBrightnessPicker DockPanel.Dock="Left" Width="400"
                                           DataContext="{Binding ElementName=colorPicker}"
-                                          SelectedColor="{Binding Color, Mode=TwoWay}"/>
+                                          Color="{Binding Color, Mode=TwoWay}"
+                                          Hue="{Binding Hue, Mode=OneWay}"/>
         <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="40"
                          DataContext="{Binding ElementName=colorPicker}"
                          SelectedHue="{Binding Hue, Mode=TwoWay}"/>

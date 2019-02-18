@@ -17,8 +17,10 @@ namespace WpfColorPicker
 {
     public partial class SaturationBrightnessPicker : UserControl
     {
-        private static readonly DependencyProperty SelectedColorProperty 
-            = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(SaturationBrightnessPicker), new PropertyMetadata(Colors.Red, OnSelectedColorChanged));
+        public static readonly DependencyProperty ColorProperty 
+            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(SaturationBrightnessPicker), new PropertyMetadata(Colors.Red, OnColorChanged));
+        public static readonly DependencyProperty HueProperty 
+            = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SaturationBrightnessPicker), new PropertyMetadata(0.0, OnHueChanged));
         private readonly SaturationBrightnessPickerAdorner _adorner;
 
         public SaturationBrightnessPicker()
@@ -28,10 +30,16 @@ namespace WpfColorPicker
             Loaded += SaturationBrightnessPickerOnLoaded;
         }
 
-        public Color SelectedColor
+        public Color Color
         {
-            get => (Color)GetValue(SelectedColorProperty);
-            set => SetValue(SelectedColorProperty, value);
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        public double Hue
+        {
+            get => (double)GetValue(HueProperty);
+            set => SetValue(HueProperty, value);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -52,10 +60,16 @@ namespace WpfColorPicker
             UpdateAdorner(e.GetPosition(this));
         }
 
-        private static void OnSelectedColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var picker = (SaturationBrightnessPicker)o;
             picker.hue.Color = (Color)e.NewValue;
+        }
+
+        private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            var picker = (SaturationBrightnessPicker)o;
+            picker.hue.Color = ColorHelper.FromHSV((double)e.NewValue, 1.0, 1.0);
         }
 
         private void SaturationBrightnessPickerOnLoaded(object sender, RoutedEventArgs e)

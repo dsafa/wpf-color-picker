@@ -47,7 +47,7 @@ namespace WpfColorPicker
         private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var colorPicker = (ColorPicker)o;
-            colorPicker.Color = ColorHelper.FromHSV((double)e.NewValue, 1, 1);
+            colorPicker.Hue = (double)e.NewValue;
         }
     }
 }
