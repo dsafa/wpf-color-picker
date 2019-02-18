@@ -1,32 +1,28 @@
-﻿<UserControl x:Class="WpfColorPicker.SaturationBrightnessPicker"
+﻿<UserControl x:Class="WpfColorPicker.HuePicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfColorPicker"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500"
+             d:DesignHeight="500" d:DesignWidth="50"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             x:Name="saturationBrightnessPicker"
              Background="Black">
     <Canvas>
         <Rectangle Width="{Binding ActualWidth}" Height="{Binding ActualHeight}">
             <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" Offset="0" />
-                        <GradientStop x:Name="hue" Color="{Binding SelectedColor, ElementName=saturationBrightnessPicker, Mode=OneWay}" Offset="1" />
+                        <GradientStop Color="#FF0000" Offset="0" />
+                        <GradientStop Color="#FFFF00" Offset="0.167" />
+                        <GradientStop Color="#00FF00" Offset="0.333" />
+                        <GradientStop Color="#00FFFF" Offset="0.5" />
+                        <GradientStop Color="#0000FF" Offset="0.667" />
+                        <GradientStop Color="#FF00FF" Offset="0.833" />
+                        <GradientStop Color="#FF0000" Offset="1" />
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Rectangle.Fill>
-            <Rectangle.OpacityMask>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
-                        <GradientStop Color="#00000000" Offset="1"/>
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Rectangle.OpacityMask>
         </Rectangle>
     </Canvas>
 </UserControl>

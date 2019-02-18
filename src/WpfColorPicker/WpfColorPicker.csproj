@@ -48,6 +48,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HuePicker.xaml.cs">
+      <DependentUpon>HuePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SaturationBrightnessPicker.xaml.cs">
       <DependentUpon>SaturationBrightnessPicker.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="HuePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SaturationBrightnessPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

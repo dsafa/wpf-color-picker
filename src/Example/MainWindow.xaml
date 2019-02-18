@@ -8,6 +8,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <color:SaturationBrightnessPicker></color:SaturationBrightnessPicker>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        <color:SaturationBrightnessPicker Grid.Column="0"/>
+        <color:HuePicker Grid.Column="1"/>
     </Grid>
 </Window>
