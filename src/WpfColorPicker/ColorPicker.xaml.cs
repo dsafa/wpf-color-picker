@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +22,32 @@ namespace WpfColorPicker
     /// </summary>
     public partial class ColorPicker : UserControl
     {
+        public static readonly DependencyProperty ColorProperty
+            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Colors.Red));
+        public static readonly DependencyProperty HueProperty
+            = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(ColorPicker), new PropertyMetadata(0.0, OnHueChanged));
+
+        public Color Color
+        {
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        public double Hue
+        {
+            get => (double)GetValue(HueProperty);
+            set => SetValue(HueProperty, value);
+        }
+
         public ColorPicker()
         {
             InitializeComponent();
+        }
+
+        private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPicker = (ColorPicker)o;
+            colorPicker.Color = ColorHelper.FromHSV((double)e.NewValue, 1, 1);
         }
     }
 }

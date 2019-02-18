@@ -22,23 +22,6 @@ namespace Example
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private Color _c = Colors.Red;
-
-        public Color C
-        {
-            get => _c;
-            set
-            {
-                if (value == _c)
-                {
-                    return;
-                }
-
-                _c = value;
-                PropertyChange();
-            }
-        }
-
         public MainWindow()
         {
             InitializeComponent();

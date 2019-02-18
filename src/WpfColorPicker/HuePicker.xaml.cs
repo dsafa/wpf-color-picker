@@ -21,8 +21,8 @@ namespace WpfColorPicker
     /// </summary>
     public partial class HuePicker : UserControl
     {
-        private static readonly DependencyProperty SelectedColorProperty
-            = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(HuePicker), new PropertyMetadata(Colors.Red, OnSelectedColorChanged));
+        public static readonly DependencyProperty SelectedHueProperty
+            = DependencyProperty.Register(nameof(SelectedHue), typeof(double), typeof(HuePicker), new PropertyMetadata(0.0, OnSelectedHueChanged));
         private readonly HuePickerAdorner _adorner;
 
         public HuePicker()
@@ -32,10 +32,10 @@ namespace WpfColorPicker
             Loaded += HuePickerOnLoaded;
         }
 
-        public Color SelectedColor
+        public double SelectedHue
         {
-            get => (Color)GetValue(SelectedColorProperty);
-            set => SetValue(SelectedColorProperty, value);
+            get => (double)GetValue(SelectedHueProperty);
+            set => SetValue(SelectedHueProperty, value);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -56,15 +56,14 @@ namespace WpfColorPicker
             UpdateAdorner(e.GetPosition(this));
         }
 
-        private static void OnSelectedColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnSelectedHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var huePicker = (HuePicker)o;
-            huePicker.UpdateAdorner((Color)e.NewValue);
+            huePicker.UpdateAdorner((double)e.NewValue);
         }
 
-        private void UpdateAdorner(Color color)
+        private void UpdateAdorner(double hue)
         {
-            double hue = color.GetHue();
             double percent = hue / 360;
 
             // Make it so that the arrow doesn't jump back to the top when it goes to the bottom
@@ -75,7 +74,7 @@ namespace WpfColorPicker
             }
 
             _adorner.VerticalPercent = percent;
-            _adorner.Color = color;
+            _adorner.Color = ColorHelper.FromHSV(hue, 1, 1);
         }
 
         private void UpdateAdorner(Point mousePos)
@@ -85,7 +84,7 @@ namespace WpfColorPicker
 
             Color c = hueGradients.GradientStops.GetColorAtOffset(verticalPercent);
             _adorner.Color = c;
-            SelectedColor = c;
+            SelectedHue = c.GetHue();
         }
 
         private void HuePickerOnLoaded(object sender, RoutedEventArgs e)
