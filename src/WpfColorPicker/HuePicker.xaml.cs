@@ -21,8 +21,7 @@ namespace WpfColorPicker
     /// </summary>
     public partial class HuePicker : UserControl
     {
-        public static readonly DependencyProperty SelectedHueProperty
-            = DependencyProperty.Register(nameof(SelectedHue), typeof(double), typeof(HuePicker), new PropertyMetadata(0.0, OnSelectedHueChanged));
+        public static readonly DependencyProperty SelectedHueProperty = DependencyProperty.Register(nameof(SelectedHue), typeof(double), typeof(HuePicker), new PropertyMetadata(0.0, OnSelectedHueChanged));
         private readonly HuePickerAdorner _adorner;
 
         public HuePicker()

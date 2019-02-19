@@ -4,16 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfColorPicker"
+             xmlns:converters="clr-namespace:WpfColorPicker.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=local:ColorPickerViewModel, IsDesignTimeCreatable=True}"
              x:Name="colorPicker"
              Height="400">
-    <DockPanel DataContext="{Binding ElementName=colorPicker}">
+    <UserControl.Resources>
+        <converters:UnitToPercentConverter x:Key="toPercentConverter"/>
+    </UserControl.Resources>
+    <DockPanel>
         <local:SaturationBrightnessPicker DockPanel.Dock="Left" Width="350" Height="350"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"
-                                          Color="{Binding Color, Mode=TwoWay}"
-                                          Hue="{Binding Hue, Mode=OneWay}"/>
+                                          Brightness="{Binding Brightness, Mode=TwoWay}"
+                                          Saturation="{Binding Saturation, Mode=TwoWay}"
+                                          Hue="{Binding LateBindHue, Mode=OneWay}"/>
         <local:HuePicker DockPanel.Dock="Left" Margin="20, 0" HorizontalAlignment="Left" Width="30" Height="350"
                          SelectedHue="{Binding Hue, Mode=TwoWay}"/>
         <DockPanel Height="350">
@@ -65,20 +71,20 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="H:" Grid.Row="0"/>
+                <local:ColorNumericInput Grid.Row="0" Grid.Column="1" Min="0" Max="360" Value="{Binding Hue, Mode=TwoWay}"/>
                 <Label Content="S:" Grid.Row="1"/>
+                <local:ColorNumericInput Grid.Row="1" Grid.Column="1" Min="0" Max="100" Value="{Binding Saturation, Mode=TwoWay, Converter={StaticResource toPercentConverter}}"/>
                 <Label Content="B:" Grid.Row="2"/>
+                <local:ColorNumericInput Grid.Row="2" Grid.Column="1" Min="0" Max="100" Value="{Binding Brightness, Mode=TwoWay, Converter={StaticResource toPercentConverter}}"/>
                 <Border Grid.Row="3" Margin="0, 10, 0, 0" Grid.ColumnSpan="2"/>
                 <Label Content="R:" Grid.Row="4"/>
+                <local:ColorNumericInput Grid.Row="4" Grid.Column="1" Min="0" Max="255" Value="{Binding Red, Mode=TwoWay}"/>
                 <Label Content="G:" Grid.Row="5"/>
+                <local:ColorNumericInput Grid.Row="5" Grid.Column="1" Min="0" Max="255" Value="{Binding Green, Mode=TwoWay}"/>
                 <Label Content="B:" Grid.Row="6"/>
+                <local:ColorNumericInput Grid.Row="6" Grid.Column="1" Min="0" Max="255" Value="{Binding Blue, Mode=TwoWay}"/>
                 <Label Content="A:" Grid.Row="7"/>
-                <local:ColorNumericInput Grid.Row="0" Grid.Column="1" Min="0" Max="360"/>
-                <local:ColorNumericInput Grid.Row="1" Grid.Column="1" Min="0" Max="100"/>
-                <local:ColorNumericInput Grid.Row="2" Grid.Column="1" Min="0" Max="100"/>
-                <local:ColorNumericInput Grid.Row="4" Grid.Column="1" Min="0" Max="255"/>
-                <local:ColorNumericInput Grid.Row="5" Grid.Column="1" Min="0" Max="255"/>
-                <local:ColorNumericInput Grid.Row="6" Grid.Column="1" Min="0" Max="255"/>
-                <local:ColorNumericInput Grid.Row="7" Grid.Column="1" Min="0" Max="255"/>
+                <local:ColorNumericInput Grid.Row="7" Grid.Column="1" Min="0" Max="255" Value="{Binding Alpha, Mode=TwoWay}"/>
                 <Label Grid.Row="0" Grid.Column="2" Content="°"/>
                 <Label Grid.Row="1" Grid.Column="2" Content="%"/>
                 <Label Grid.Row="2" Grid.Column="2" Content="%"/>

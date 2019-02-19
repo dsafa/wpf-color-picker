@@ -17,10 +17,9 @@ namespace WpfColorPicker
 {
     public partial class SaturationBrightnessPicker : UserControl
     {
-        public static readonly DependencyProperty ColorProperty 
-            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(SaturationBrightnessPicker), new PropertyMetadata(Colors.Red, OnColorChanged));
-        public static readonly DependencyProperty HueProperty 
-            = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SaturationBrightnessPicker), new PropertyMetadata(0.0, OnHueChanged));
+        public static readonly DependencyProperty HueProperty = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SaturationBrightnessPicker), new PropertyMetadata(0.0, OnHueChanged));
+        public static readonly DependencyProperty SaturationProperty = DependencyProperty.Register(nameof(Saturation), typeof(double), typeof(SaturationBrightnessPicker), new PropertyMetadata(1.0, OnSaturationChanged));
+        public static readonly DependencyProperty BrightnessProperty = DependencyProperty.Register(nameof(Brightness), typeof(double), typeof(SaturationBrightnessPicker), new PropertyMetadata(1.0, OnBrightnessChanged));
         private readonly SaturationBrightnessPickerAdorner _adorner;
 
         public SaturationBrightnessPicker()
@@ -30,16 +29,22 @@ namespace WpfColorPicker
             Loaded += SaturationBrightnessPickerOnLoaded;
         }
 
-        public Color Color
-        {
-            get => (Color)GetValue(ColorProperty);
-            set => SetValue(ColorProperty, value);
-        }
-
         public double Hue
         {
             get => (double)GetValue(HueProperty);
             set => SetValue(HueProperty, value);
+        }
+
+        public double Saturation
+        {
+            get => (double)GetValue(SaturationProperty);
+            set => SetValue(SaturationProperty, value);
+        }
+
+        public double Brightness
+        {
+            get => (double)GetValue(BrightnessProperty);
+            set => SetValue(BrightnessProperty, value);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -52,23 +57,34 @@ namespace WpfColorPicker
             }
 
             UpdateAdorner(e.GetPosition(this));
+            UpdateColor(e.GetPosition(this));
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             base.OnMouseUp(e);
             UpdateAdorner(e.GetPosition(this));
-        }
-
-        private static void OnColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            var picker = (SaturationBrightnessPicker)o;
+            UpdateColor(e.GetPosition(this));
         }
 
         private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var picker = (SaturationBrightnessPicker)o;
-            picker.UpdateColor(Mouse.GetPosition(picker));
+            picker.UpdateColor(picker._adorner.Position);
+        }
+
+        private static void OnSaturationChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            var picker = (SaturationBrightnessPicker)o;
+            var x = picker.Saturation * picker.ActualWidth;
+            picker.UpdateAdorner(new Point(x, picker._adorner.Position.Y));
+        }
+
+        private static void OnBrightnessChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            var picker = (SaturationBrightnessPicker)o;
+            var y = (1 - picker.Brightness) * picker.ActualWidth;
+            picker.UpdateAdorner(new Point(picker._adorner.Position.X, y));
         }
 
         private void SaturationBrightnessPickerOnLoaded(object sender, RoutedEventArgs e)
@@ -81,15 +97,12 @@ namespace WpfColorPicker
         private void UpdateAdorner(Point p)
         {
             _adorner.Position = p;
-            UpdateColor(p);
         }
 
         private void UpdateColor(Point p)
         {
-            var saturationPercent = p.X / ActualWidth;
-            var brightnessPercent = 1 - (p.Y / ActualHeight); // directions reversed
-
-            Color = ColorHelper.FromHSV(Hue, saturationPercent, brightnessPercent);
+            Saturation = p.X / ActualWidth;
+            Brightness = 1 - (p.Y / ActualHeight); // directions reversed
         }
     }
 }

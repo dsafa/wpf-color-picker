@@ -54,7 +54,9 @@
     <Compile Include="ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorPickerViewModel.cs" />
     <Compile Include="Converters\HueToColorConverter.cs" />
+    <Compile Include="Converters\UnitToPercentConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HuePicker.xaml.cs">
       <DependentUpon>HuePicker.xaml</DependentUpon>

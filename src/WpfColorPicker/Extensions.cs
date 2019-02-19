@@ -43,9 +43,44 @@ namespace WpfColorPicker
             return Color.FromArgb(a, r, g, b);
         }
 
+        /// <summary>
+        /// Gets hue in hsb model.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         internal static double GetHue(this Color color)
         {
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B).GetHue();
+        }
+
+        /// <summary>
+        /// Gets the brightness in hsb model.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        internal static double GetBrightness(this Color color)
+        {
+            var c = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            var hslSat = c.GetSaturation();
+            var l = c.GetBrightness(); // actaully luminance
+
+            return l + hslSat * Math.Min(l, 1 - l);
+        }
+
+        internal static double GetSaturation(this Color color)
+        {
+            var c = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            var l = c.GetBrightness();
+            var b = GetBrightness(color);
+
+            if (b == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 2 - (2 * l / b);
+            }
         }
     }
 }
