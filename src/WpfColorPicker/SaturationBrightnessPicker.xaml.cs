@@ -63,13 +63,12 @@ namespace WpfColorPicker
         private static void OnColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var picker = (SaturationBrightnessPicker)o;
-            picker.hue.Color = (Color)e.NewValue;
         }
 
         private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var picker = (SaturationBrightnessPicker)o;
-            picker.hue.Color = ColorHelper.FromHSV((double)e.NewValue, 1.0, 1.0);
+            picker.UpdateColor(Mouse.GetPosition(picker));
         }
 
         private void SaturationBrightnessPickerOnLoaded(object sender, RoutedEventArgs e)
@@ -82,6 +81,15 @@ namespace WpfColorPicker
         private void UpdateAdorner(Point p)
         {
             _adorner.Position = p;
+            UpdateColor(p);
+        }
+
+        private void UpdateColor(Point p)
+        {
+            var saturationPercent = p.X / ActualWidth;
+            var brightnessPercent = 1 - (p.Y / ActualHeight); // directions reversed
+
+            Color = ColorHelper.FromHSV(Hue, saturationPercent, brightnessPercent);
         }
     }
 }

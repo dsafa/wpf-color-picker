@@ -5,24 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfColorPicker"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="300" d:DesignWidth="800"
              x:Name="colorPicker"
              Height="400">
-    <DockPanel>
-        <local:SaturationBrightnessPicker DockPanel.Dock="Left" Width="400"
-                                          DataContext="{Binding ElementName=colorPicker}"
+    <DockPanel DataContext="{Binding ElementName=colorPicker}">
+        <local:SaturationBrightnessPicker DockPanel.Dock="Left" Width="350" Height="350"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
                                           Color="{Binding Color, Mode=TwoWay}"
                                           Hue="{Binding Hue, Mode=OneWay}"/>
-        <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="40"
-                         DataContext="{Binding ElementName=colorPicker}"
+        <local:HuePicker DockPanel.Dock="Left" Margin="20, 0" HorizontalAlignment="Left" Width="30" Height="350"
                          SelectedHue="{Binding Hue, Mode=TwoWay}"/>
-        <DockPanel>
-            <TextBox DockPanel.Dock="Top" Height="30" VerticalAlignment="Top" Width="100"
-                     DataContext="{Binding ElementName=colorPicker}"
-                     Text="{Binding Color}"/>
-            <TextBox DockPanel.Dock="Top" Height="30" VerticalAlignment="Top" Width="100"
-                     DataContext="{Binding ElementName=colorPicker}"
-                     Text="{Binding Hue}"/>
+        <DockPanel Height="350">
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Current Color"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="New Color"/>
+                <Rectangle Grid.Row="1" Grid.Column="0">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding OldColor}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Grid.Row="1" Grid.Column="1">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding Color}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
         </DockPanel>
     </DockPanel>
 </UserControl>
