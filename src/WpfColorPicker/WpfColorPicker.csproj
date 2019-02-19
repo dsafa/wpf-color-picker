@@ -58,6 +58,9 @@
     <Compile Include="Converters\HueToColorConverter.cs" />
     <Compile Include="Converters\UnitToPercentConverter.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="EyeDropper.xaml.cs">
+      <DependentUpon>EyeDropper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HuePicker.xaml.cs">
       <DependentUpon>HuePicker.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EyeDropper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

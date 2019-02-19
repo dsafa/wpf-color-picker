@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              x:ClassModifier="internal"
              d:DesignHeight="450" d:DesignWidth="800"
-             x:Name="numericInput">
-    <StackPanel>
-        <TextBox HorizontalContentAlignment="Right"
-                 PreviewTextInput="TextBoxOnPreviewTextInput" 
-                 Text="{Binding Value, ElementName=numericInput}"/>
-    </StackPanel>
+             x:Name="numericInput"
+             >
+    <TextBox HorizontalContentAlignment="Right"
+             PreviewTextInput="TextBoxOnPreviewTextInput"
+             VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+             Text="{Binding Value, ElementName=numericInput}"/>
 </UserControl>
