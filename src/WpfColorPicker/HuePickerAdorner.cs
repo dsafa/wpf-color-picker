@@ -15,7 +15,7 @@ namespace WpfColorPicker
             DependencyProperty.Register(nameof(VerticalPercent), typeof(double), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
         private static readonly DependencyProperty ColorProperty =
             DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
-        private static readonly Pen Pen = new Pen(Brushes.Black, 2);
+        private static readonly Pen Pen = new Pen(Brushes.Black, 1);
         private Brush _brush = Brushes.Red;
 
         public HuePickerAdorner(UIElement adornedElement)
@@ -45,20 +45,27 @@ namespace WpfColorPicker
             base.OnRender(drawingContext);
 
             var adornedElementRect = new Rect(AdornedElement.DesiredSize);
-            var width = adornedElementRect.Width / 3;
+            var width = 10;
             var y = adornedElementRect.Height * VerticalPercent;
-            var x = adornedElementRect.Width - width;
+            var x = -width;
 
             var triangleGeometry = new StreamGeometry();
             using (var context = triangleGeometry.Open())
             {
-                context.BeginFigure(new Point(x, y), true, true);
-                context.LineTo(new Point(x + width, y + width / 2), true, false);
-                context.LineTo(new Point(x + width, y - width / 2), true, false);
+                context.BeginFigure(new Point(x, y + width / 2), true, true);
+                context.LineTo(new Point(x + width, y), true, false);
+                context.LineTo(new Point(x, y - width / 2), true, false);
             }
 
+            var rightTri = triangleGeometry.Clone();
+            var transformGroup = new TransformGroup();
+            transformGroup.Children.Add(new ScaleTransform(-1, 1));
+            transformGroup.Children.Add(new TranslateTransform(adornedElementRect.Width, 0));
+            rightTri.Transform = transformGroup;
+
+
             drawingContext.DrawGeometry(_brush, Pen, triangleGeometry);
-            drawingContext.DrawLine(Pen, new Point(x, y), new Point(0, y));
+            drawingContext.DrawGeometry(_brush, Pen, rightTri);
         }
     }
 }

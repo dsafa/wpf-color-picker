@@ -20,7 +20,7 @@
                                           Brightness="{Binding Brightness, Mode=TwoWay}"
                                           Saturation="{Binding Saturation, Mode=TwoWay}"
                                           Hue="{Binding LateBindHue, Mode=OneWay}"/>
-        <local:HuePicker DockPanel.Dock="Left" Margin="20, 0" HorizontalAlignment="Left" Width="30" Height="350"
+        <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="50" Height="350"
                          SelectedHue="{Binding Hue, Mode=TwoWay}"/>
         <DockPanel Height="350">
             <Grid DockPanel.Dock="Top">

@@ -44,10 +44,12 @@ namespace WpfColorPicker
                 _red = _color.R;
                 _green = _color.G;
                 _blue = _color.B;
+                _alpha = _color.A;
 
                 OnPropertyChanged(nameof(Red));
                 OnPropertyChanged(nameof(Green));
                 OnPropertyChanged(nameof(Blue));
+                OnPropertyChanged(nameof(Alpha));
 
                 _hue = _color.GetHue();
                 _saturation = _color.GetSaturation();
@@ -71,6 +73,8 @@ namespace WpfColorPicker
 
                 _oldColor = value;
                 OnPropertyChanged();
+
+                _dirty = false;
             }
         }
 
@@ -79,7 +83,7 @@ namespace WpfColorPicker
             get => _hue;
             set
             {
-                if (value == Hue)
+                if (value == _hue)
                 {
                     return;
                 }
@@ -101,7 +105,7 @@ namespace WpfColorPicker
             get => _saturation;
             set
             {
-                if (value == Saturation)
+                if (value == _saturation)
                 {
                     return;
                 }
@@ -117,7 +121,7 @@ namespace WpfColorPicker
             get => _brightness;
             set
             {
-                if (value == Brightness)
+                if (value == _brightness)
                 {
                     return;
                 }
@@ -202,6 +206,7 @@ namespace WpfColorPicker
         private void UpdateRGB()
         {
             _color = ColorHelper.FromHSV(Hue, Saturation, Brightness);
+            _color = Color.FromArgb(Alpha, _color.R, _color.G, _color.B);
             _red = _color.R;
             _green = _color.G;
             _blue = _color.B;

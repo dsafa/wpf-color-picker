@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:WpfColorPicker"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="50"
-             Background="Black">
-    <DockPanel LastChildFill="True">
+             Background="Transparent">
+    <DockPanel Margin="10,0">
         <Rectangle Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
                    x:Name="hueRectangle">

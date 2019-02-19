@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace WpfColorPicker
@@ -81,6 +83,14 @@ namespace WpfColorPicker
             {
                 return 2 - (2 * l / b);
             }
+        }
+
+        internal static Point Clip(this Point p, FrameworkElement element)
+        {
+            var pos = Mouse.GetPosition(element);
+            pos.X = Math.Min(Math.Max(0, pos.X), element.ActualWidth);
+            pos.Y = Math.Min(Math.Max(0, pos.Y), element.ActualHeight);
+            return pos;
         }
     }
 }

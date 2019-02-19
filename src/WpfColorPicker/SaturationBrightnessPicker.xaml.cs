@@ -56,15 +56,21 @@ namespace WpfColorPicker
                 return;
             }
 
-            UpdateAdorner(e.GetPosition(this));
-            UpdateColor(e.GetPosition(this));
+            Mouse.Capture(this);
+            var pos = e.GetPosition(this).Clip(this);
+
+            UpdateAdorner(pos);
+            UpdateColor(pos);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             base.OnMouseUp(e);
-            UpdateAdorner(e.GetPosition(this));
-            UpdateColor(e.GetPosition(this));
+            Mouse.Capture(null);
+
+            var pos = e.GetPosition(this).Clip(this);
+            UpdateAdorner(pos);
+            UpdateColor(pos);
         }
 
         private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
@@ -90,7 +96,6 @@ namespace WpfColorPicker
         private void SaturationBrightnessPickerOnLoaded(object sender, RoutedEventArgs e)
         {
             AdornerLayer.GetAdornerLayer(this).Add(_adorner);
-            _adorner.IsClipEnabled = true;
             _adorner.Position = new Point(ActualWidth, 0);
         }
 

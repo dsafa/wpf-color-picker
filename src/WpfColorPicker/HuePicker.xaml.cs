@@ -46,13 +46,16 @@ namespace WpfColorPicker
                 return;
             }
 
-            UpdateAdorner(e.GetPosition(this));
+            Mouse.Capture(this);
+
+            UpdateAdorner(e.GetPosition(this).Clip(this));
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             base.OnMouseUp(e);
-            UpdateAdorner(e.GetPosition(this));
+            Mouse.Capture(null);
+            UpdateAdorner(e.GetPosition(this).Clip(this));
         }
 
         private static void OnSelectedHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
