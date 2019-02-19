@@ -60,6 +60,9 @@
       <DependentUpon>HuePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="HuePickerAdorner.cs" />
+    <Compile Include="ColorNumericInput.xaml.cs">
+      <DependentUpon>ColorNumericInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SaturationBrightnessPicker.xaml.cs">
       <DependentUpon>SaturationBrightnessPicker.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HuePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorNumericInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
