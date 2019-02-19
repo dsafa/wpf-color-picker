@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,20 +21,15 @@ namespace WpfColorPicker
     internal partial class EyeDropperWindow : Window
     {
         private readonly EyeDropperWindowAdorner _adorner;
-        private byte[] _pixels;
-        private int _stride;
-        private int _height;
+        private readonly BitmapImage _image;
+
 
         public EyeDropperWindow(BitmapImage image)
         {
             InitializeComponent();
             windowImage.Source = image;
+            _image = image;
             _adorner = new EyeDropperWindowAdorner(windowImage);
-
-            _stride = image.PixelWidth * 4;
-            _height = image.PixelHeight;
-            _pixels = new byte[_height * _stride];
-            image.CopyPixels(_pixels, _stride, 0);
 
             Loaded += EyeDropperWindowOnLoaded;
         }
@@ -43,6 +39,7 @@ namespace WpfColorPicker
             base.OnMouseMove(e);
             var pos = e.GetPosition(this);
             _adorner.Color = GetColorAtPoint(pos);
+            _adorner.SurroundingPixels = GetSurrounding(pos);
             _adorner.Position = pos;
         }
 
@@ -64,12 +61,28 @@ namespace WpfColorPicker
             var x = (int)point.X;
             var y = (int)point.Y;
 
-            var index = y * _stride + (x * 4);
-            var b = _pixels[index];
-            var g = _pixels[index + 1];
-            var r = _pixels[index + 2];
-            var a = _pixels[index + 3];
-            return Color.FromArgb(a, r, g, b);
+            byte[] buffer = new byte[4];
+            _image.CopyPixels(new Int32Rect(x, y, 1, 1), buffer, 4, 0);
+            return Color.FromArgb(buffer[3], buffer[2], buffer[1], buffer[0]);
+        }
+
+        private ImageSource GetSurrounding(Point point)
+        {
+            var x = (int)point.X;
+            var y = (int)point.Y;
+
+            const int numSurroundingPixels = 7;
+            const int length = numSurroundingPixels * 2;
+
+            // clamp x and y so there is always room on the edge
+            x = Math.Min(Math.Max(numSurroundingPixels + 1, x), (int)ActualWidth - numSurroundingPixels - 1);
+            y = Math.Min(Math.Max(numSurroundingPixels + 1, y), (int)ActualHeight - numSurroundingPixels - 1);
+
+            // create array that will fit the surrounding pixels
+            byte[] buffer = new byte[length * length * 4];
+            var stride = length * 4;
+            _image.CopyPixels(new Int32Rect(x - numSurroundingPixels, y - numSurroundingPixels, length, length), buffer, stride, 0);
+            return BitmapSource.Create(length, length, 96, 96, PixelFormats.Pbgra32, null, buffer, stride);
         }
     }
 }

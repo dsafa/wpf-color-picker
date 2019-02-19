@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfColorPicker"
         mc:Ignorable="d"
-        Title="EyeDropperWindow" Height="450" Width="800"
+        Title="EyeDropperWindow"
+        ResizeMode="NoResize"
         WindowState="Maximized" WindowStyle="None"
         KeyDown="WindowOnKeyDown">
     <Image Stretch="Fill" x:Name="windowImage" Cursor="Cross"/>
