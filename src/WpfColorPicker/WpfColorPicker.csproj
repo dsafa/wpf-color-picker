@@ -61,6 +61,10 @@
     <Compile Include="EyeDropper.xaml.cs">
       <DependentUpon>EyeDropper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EyeDropperWindow.xaml.cs">
+      <DependentUpon>EyeDropperWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EyeDropperWindowAdorner.cs" />
     <Compile Include="HuePicker.xaml.cs">
       <DependentUpon>HuePicker.xaml</DependentUpon>
     </Compile>
@@ -100,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EyeDropper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EyeDropperWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
