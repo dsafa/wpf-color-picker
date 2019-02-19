@@ -20,29 +20,30 @@
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Current Color"/>
-                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Content="New Color"/>
-                <Rectangle Grid.Row="1" Grid.Column="0">
+                <Label Grid.Row="0" Content="Current Color"/>
+                <Rectangle Grid.Row="1">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding OldColor}" />
                     </Rectangle.Fill>
                 </Rectangle>
-                <Rectangle Grid.Row="1" Grid.Column="1">
+                <Rectangle Grid.Row="2">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding Color}" />
                     </Rectangle.Fill>
                 </Rectangle>
+                <Label Grid.Row="3" Content="New Color"/>
             </Grid>
-            <Grid Margin="0, 20, 0, 0">
+            <Grid VerticalAlignment="Bottom">
                 <Grid.Resources>
                     <Style TargetType="{x:Type local:ColorNumericInput}">
-                        <Setter Property="Margin" Value="4,0"/>
+                        <Setter Property="Margin" Value="4,0,0,0"/>
                         <Setter Property="Height" Value="Auto"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
                     </Style>
@@ -56,10 +57,11 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="H:" Grid.Row="0"/>
@@ -80,6 +82,7 @@
                 <Label Grid.Row="0" Grid.Column="2" Content="°"/>
                 <Label Grid.Row="1" Grid.Column="2" Content="%"/>
                 <Label Grid.Row="2" Grid.Column="2" Content="%"/>
+                <TextBox Text="{Binding Color}" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0, 8, 0, 0" Height="20" VerticalAlignment="Center"/>
             </Grid>
         </DockPanel>
     </DockPanel>

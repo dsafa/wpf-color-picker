@@ -9,8 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="numericInput">
     <StackPanel>
-        <TextBox Grid.Row="2" Grid.Column="1"
-                 HorizontalContentAlignment="Right"
+        <TextBox HorizontalContentAlignment="Right"
                  PreviewTextInput="TextBoxOnPreviewTextInput" 
                  Text="{Binding Value, ElementName=numericInput}"/>
     </StackPanel>

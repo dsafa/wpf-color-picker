@@ -74,5 +74,10 @@ namespace WpfColorPicker
                 colorPicker._dirty = true;
             }
         }
+
+        private void Label_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+
+        }
     }
 }
