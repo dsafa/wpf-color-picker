@@ -33,8 +33,8 @@ namespace WpfColorPicker
         {
             base.OnRender(drawingContext);
 
-            drawingContext.DrawEllipse(FillBrush, InnerRingPen, Position, 6, 6);
-            drawingContext.DrawEllipse(FillBrush, OuterRingPen, Position, 8, 8);
+            drawingContext.DrawEllipse(FillBrush, InnerRingPen, Position, 4, 4);
+            drawingContext.DrawEllipse(FillBrush, OuterRingPen, Position, 6, 6);
         }
     }
 }

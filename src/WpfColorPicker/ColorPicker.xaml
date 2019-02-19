@@ -9,19 +9,17 @@
              d:DesignHeight="300" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=local:ColorPickerViewModel, IsDesignTimeCreatable=True}"
              x:Name="colorPicker"
-             Height="400">
+             Height="350">
     <UserControl.Resources>
         <converters:UnitToPercentConverter x:Key="toPercentConverter"/>
     </UserControl.Resources>
     <DockPanel>
         <local:SaturationBrightnessPicker DockPanel.Dock="Left" Width="350" Height="350"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
-                                          Brightness="{Binding Brightness, Mode=TwoWay}"
-                                          Saturation="{Binding Saturation, Mode=TwoWay}"
-                                          Hue="{Binding LateBindHue, Mode=OneWay}"/>
+                                              Brightness="{Binding Brightness, Mode=TwoWay}"
+                                              Saturation="{Binding Saturation, Mode=TwoWay}"
+                                              Hue="{Binding LateBindHue, Mode=OneWay}"/>
         <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="50" Height="350"
-                         SelectedHue="{Binding Hue, Mode=TwoWay}"/>
+                        SelectedHue="{Binding Hue, Mode=TwoWay}"/>
         <DockPanel Height="350">
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>

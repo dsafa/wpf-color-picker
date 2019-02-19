@@ -13,26 +13,25 @@
     <UserControl.Resources>
         <converters:HueToColorConverter x:Key="hueToColorConverter"/>
     </UserControl.Resources>
-    <DockPanel>
+    <DockPanel SnapsToDevicePixels="True">
+        <DockPanel.Resources>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="gradientBrush">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop x:Name="hue"  Offset="1" 
+                                  Color="{Binding Hue, ElementName=saturationBrightnessPicker, Mode=OneWay, Converter={StaticResource hueToColorConverter}}" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="maskBrush">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </DockPanel.Resources>
         <Rectangle Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
-                   Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}">
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" Offset="0" />
-                        <GradientStop x:Name="hue"  Offset="1" 
-                                      Color="{Binding Hue, ElementName=saturationBrightnessPicker, Mode=OneWay, Converter={StaticResource hueToColorConverter}}" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-            <Rectangle.OpacityMask>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
-                        <GradientStop Color="#00000000" Offset="1"/>
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Rectangle.OpacityMask>
+                   Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
+                   Fill="{DynamicResource gradientBrush}" OpacityMask="{StaticResource maskBrush}">
         </Rectangle>
     </DockPanel>
 </UserControl>
