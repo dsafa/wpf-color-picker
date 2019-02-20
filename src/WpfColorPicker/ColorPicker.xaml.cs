@@ -14,10 +14,10 @@ namespace WpfColorPicker
 
         public ColorPicker()
         {
-            InitializeComponent();
             var vm = new ColorPickerViewModel();
             vm.PropertyChanged += ViewModelOnPropertyChanged;
             DataContext = vm;
+            InitializeComponent();
         }
 
         public Color Color
@@ -29,7 +29,9 @@ namespace WpfColorPicker
         private static void OnColorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var colorPicker = (ColorPicker)o;
-            ((ColorPickerViewModel)colorPicker.DataContext).Color = (Color)e.NewValue;
+            var vm = ((ColorPickerViewModel)colorPicker.DataContext);
+            vm.Color = (Color)e.NewValue;
+            vm.OldColor = vm.Color;
         }
 
         private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)

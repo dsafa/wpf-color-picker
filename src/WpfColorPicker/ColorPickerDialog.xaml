@@ -64,7 +64,8 @@
         </ItemsControl>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
                     HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Content="Ok" Width="60"/>
+            <Button Content="Cancel" Width="60" Margin="4,0" IsCancel="True" Click="CancelButtonOnClick"/>
+            <Button Content="Ok" Width="60" IsDefault="True" Click="OkButtonOnClick"/>
         </StackPanel>
     </Grid>
 </Window>

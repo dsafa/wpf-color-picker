@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfColorPicker
 {
@@ -28,17 +19,49 @@ namespace WpfColorPicker
         });
 
         public ColorPickerDialog()
+            : this(Colors.Red)
         {
-            InitializeComponent();
         }
 
-        public ObservableCollection<Color> Palette { get; } = new ObservableCollection<Color>(DefaultPalette);
+        public ColorPickerDialog(Color color)
+            : this(color, DefaultPalette)
+        {
+        }
+
+        public ColorPickerDialog(Color color, IEnumerable<Color> palette)
+        {
+            if (palette == null)
+            {
+                throw new ArgumentNullException(nameof(palette));
+            }
+
+            Palette = new ObservableCollection<Color>(palette);
+            InitializeComponent();
+            colorPicker.Color = color;
+        }
+
+        public Color Color { get; private set; }
+
+        public ObservableCollection<Color> Palette { get; }
 
         private void PaletteButtonOnClick(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var color = ((SolidColorBrush)button.Background).Color;
             colorPicker.Color = color;
+        }
+
+        private void CancelButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+
+        private void OkButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Color = colorPicker.Color;
+            Close();
         }
     }
 }

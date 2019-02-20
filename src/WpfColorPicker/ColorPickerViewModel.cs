@@ -30,12 +30,6 @@ namespace WpfColorPicker
                     return;
                 }
 
-                if (!_dirty)
-                {
-                    _oldColor = _color;
-                    _dirty = true;
-                }
-
                 _color = value;
                 OnPropertyChanged();
 
@@ -51,13 +45,14 @@ namespace WpfColorPicker
             get => _oldColor;
             set
             {
-                if (value == _oldColor)
+                if (value == _oldColor || _dirty)
                 {
                     return;
                 }
 
                 _oldColor = value;
                 OnPropertyChanged();
+                _dirty = true;
             }
         }
 
