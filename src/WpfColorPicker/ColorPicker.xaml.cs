@@ -30,7 +30,6 @@ namespace WpfColorPicker
             var vm = new ColorPickerViewModel();
             vm.PropertyChanged += ViewModelOnPropertyChanged;
             DataContext = vm;
-        
         }
 
         public Color Color

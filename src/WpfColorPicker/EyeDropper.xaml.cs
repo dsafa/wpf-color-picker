@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Color = System.Windows.Media.Color;
 
 namespace WpfColorPicker
 {
@@ -22,9 +23,17 @@ namespace WpfColorPicker
     /// </summary>
     public partial class EyeDropper : UserControl
     {
+        public static DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(EyeDropper), new PropertyMetadata(Colors.Red));
+
         public EyeDropper()
         {
             InitializeComponent();
+        }
+
+        public Color SelectedColor
+        {
+            get => (Color)GetValue(SelectedColorProperty);
+            set => SetValue(SelectedColorProperty, value);
         }
 
         private void ButtonOnClick(object sender, RoutedEventArgs e)
@@ -46,7 +55,11 @@ namespace WpfColorPicker
             screenshot.Dispose();
 
             var window = new EyeDropperWindow(bitmapImage);
-            window.Show();
+            var res = window.ShowDialog();
+            if (res.HasValue && res.Value)
+            {
+                SelectedColor = window.SelectedColor;
+            }
         }
 
         private Bitmap TakeScreenshot()

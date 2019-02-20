@@ -9,6 +9,8 @@
         Title="EyeDropperWindow"
         ResizeMode="NoResize"
         WindowState="Maximized" WindowStyle="None"
-        KeyDown="WindowOnKeyDown">
+        KeyDown="WindowOnKeyDown"
+        Loaded="WindowOnLoaded"
+        MouseDown="WindowOnMouseDown">
     <Image Stretch="Fill" x:Name="windowImage" Cursor="Cross"/>
 </Window>

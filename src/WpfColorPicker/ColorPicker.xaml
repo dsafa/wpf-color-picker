@@ -35,12 +35,12 @@
                 <Label Grid.Row="0" Content="Current Color"/>
                 <Rectangle Grid.Row="1">
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding OldColor}" />
+                        <SolidColorBrush Color="{Binding OldColor, Mode=OneWay}" />
                     </Rectangle.Fill>
                 </Rectangle>
                 <Rectangle Grid.Row="2">
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding Color}" />
+                        <SolidColorBrush Color="{Binding Color, Mode=OneWay}" />
                     </Rectangle.Fill>
                 </Rectangle>
                 <Label Grid.Row="3" Content="New Color"/>
@@ -102,7 +102,7 @@
                 <local:ColorNumericInput Grid.Row="12" Grid.Column="1" Min="0" Max="255" Value="{Binding Alpha, Mode=TwoWay}"/>
                 
                 <TextBox Text="{Binding Color}" Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" />
-                <local:EyeDropper Grid.Row="14" Grid.Column="2" HorizontalAlignment="Left" Margin="4,0" Background="Transparent" />
+                <local:EyeDropper Grid.Row="14" Grid.Column="2" HorizontalAlignment="Left" Margin="4,0" Background="Transparent" SelectedColor="{Binding Color, Mode=OneWayToSource}" />
             </Grid>
         </DockPanel>
     </DockPanel>

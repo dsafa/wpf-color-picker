@@ -23,16 +23,15 @@ namespace WpfColorPicker
         private readonly EyeDropperWindowAdorner _adorner;
         private readonly BitmapImage _image;
 
-
         public EyeDropperWindow(BitmapImage image)
         {
             InitializeComponent();
             windowImage.Source = image;
             _image = image;
             _adorner = new EyeDropperWindowAdorner(windowImage);
-
-            Loaded += EyeDropperWindowOnLoaded;
         }
+
+        public Color SelectedColor { get; private set; }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
@@ -51,9 +50,16 @@ namespace WpfColorPicker
             }
         }
 
-        private void EyeDropperWindowOnLoaded(object sender, RoutedEventArgs e)
+        private void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
             AdornerLayer.GetAdornerLayer(windowImage).Add(_adorner);
+        }
+
+        private void WindowOnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DialogResult = true;
+            SelectedColor = GetColorAtPoint(e.GetPosition(this));
+            Close();
         }
 
         private Color GetColorAtPoint(Point point)

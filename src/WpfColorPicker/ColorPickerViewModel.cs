@@ -39,7 +39,7 @@ namespace WpfColorPicker
                 }
 
                 _color = value;
-                OnPropertyChanged();
+
 
                 _red = _color.R;
                 _green = _color.G;
@@ -56,8 +56,11 @@ namespace WpfColorPicker
                 _brightness = _color.GetBrightness();
 
                 OnPropertyChanged(nameof(Hue));
+                OnPropertyChanged(nameof(LateBindHue));
                 OnPropertyChanged(nameof(Saturation));
                 OnPropertyChanged(nameof(Brightness));
+
+                OnPropertyChanged();
             }
         }
 
@@ -73,8 +76,6 @@ namespace WpfColorPicker
 
                 _oldColor = value;
                 OnPropertyChanged();
-
-                _dirty = false;
             }
         }
 
@@ -225,6 +226,7 @@ namespace WpfColorPicker
             _brightness = _color.GetBrightness();
 
             OnPropertyChanged(nameof(Hue));
+            OnPropertyChanged(nameof(LateBindHue));
             OnPropertyChanged(nameof(Saturation));
             OnPropertyChanged(nameof(Brightness));
             OnPropertyChanged(nameof(Color));
