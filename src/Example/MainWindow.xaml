@@ -9,7 +9,12 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         x:Name="mainWindow">
-    <Grid>
-        <color:ColorPicker/>
-    </Grid>
+    <StackPanel>
+        <Rectangle Width="300" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{Binding ElementName=mainWindow, Path=Color}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button Content="OpenDialog" HorizontalAlignment="Center" Click="Button_Click"/>
+    </StackPanel>
 </Window>

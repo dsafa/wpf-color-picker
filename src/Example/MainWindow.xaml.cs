@@ -14,24 +14,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfColorPicker;
 
 namespace Example
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
+        public static DependencyProperty ColorProperty
+            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(MainWindow), new PropertyMetadata(Colors.Black));
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void PropertyChange([CallerMemberName] string caller = "")
+        public Color Color
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new ColorPickerDialog().ShowDialog();
         }
     }
 }
