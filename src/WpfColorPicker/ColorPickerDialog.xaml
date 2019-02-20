@@ -27,7 +27,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="28" Height="28" BorderThickness="1" Margin="2">
+                    <Button Width="28" Height="28" BorderThickness="1" Margin="2" Click="PaletteButtonOnClick">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Style.Triggers>

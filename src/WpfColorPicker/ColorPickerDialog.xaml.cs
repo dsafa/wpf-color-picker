@@ -33,5 +33,12 @@ namespace WpfColorPicker
         }
 
         public ObservableCollection<Color> Palette { get; } = new ObservableCollection<Color>(DefaultPalette);
+
+        private void PaletteButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var color = ((SolidColorBrush)button.Background).Color;
+            colorPicker.Color = color;
+        }
     }
 }
