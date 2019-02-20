@@ -28,6 +28,13 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Width="28" Height="28" BorderThickness="1" Margin="2" Click="PaletteButtonOnClick">
+                        <Button.Resources>
+                            <!--https://stackoverflow.com/a/40513959-->
+                            <SolidColorBrush x:Key="buttonBackgroundProxy" Color="{Binding}" />
+                        </Button.Resources>
+                        <Button.Background>
+                            <StaticResource ResourceKey="buttonBackgroundProxy"/>
+                        </Button.Background>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Style.Triggers>
@@ -55,9 +62,6 @@
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Button.Background>
-                            <SolidColorBrush Color="{Binding .}"/>
-                        </Button.Background>
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
