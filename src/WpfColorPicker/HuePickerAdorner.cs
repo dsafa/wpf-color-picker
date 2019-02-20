@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -11,10 +6,10 @@ namespace WpfColorPicker
 {
     internal class HuePickerAdorner : Adorner
     {
-        private static readonly DependencyProperty VerticalPercentProperty =
-            DependencyProperty.Register(nameof(VerticalPercent), typeof(double), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
-        private static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
+        private static readonly DependencyProperty VerticalPercentProperty 
+            = DependencyProperty.Register(nameof(VerticalPercent), typeof(double), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+        private static readonly DependencyProperty ColorProperty
+            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
         private static readonly Pen Pen = new Pen(Brushes.Black, 1);
         private Brush _brush = Brushes.Red;
 
@@ -40,13 +35,13 @@ namespace WpfColorPicker
             }
         }
 
+        public Rect ElementSize { get; set; }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-
-            var adornedElementRect = new Rect(AdornedElement.DesiredSize);
             var width = 10;
-            var y = adornedElementRect.Height * VerticalPercent;
+            var y = ElementSize.Height * VerticalPercent;
             var x = -width;
 
             var triangleGeometry = new StreamGeometry();
@@ -60,7 +55,7 @@ namespace WpfColorPicker
             var rightTri = triangleGeometry.Clone();
             var transformGroup = new TransformGroup();
             transformGroup.Children.Add(new ScaleTransform(-1, 1));
-            transformGroup.Children.Add(new TranslateTransform(adornedElementRect.Width, 0));
+            transformGroup.Children.Add(new TranslateTransform(ElementSize.Width, 0));
             rightTri.Transform = transformGroup;
 
 

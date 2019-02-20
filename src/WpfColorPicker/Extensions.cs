@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -11,6 +8,12 @@ namespace WpfColorPicker
 {
     internal static class Extensions
     {
+        /// <summary>
+        /// Gets the color of a gradient stop collection with the given index
+        /// </summary>
+        /// <param name="collection">Colletion of colors</param>
+        /// <param name="offset">The offset</param>
+        /// <returns>The color at the offset</returns>
         internal static Color GetColorAtOffset(this GradientStopCollection collection, double offset)
         {
             GradientStop[] stops = collection.OrderBy(x => x.Offset).ToArray();
@@ -69,6 +72,11 @@ namespace WpfColorPicker
             return l + hslSat * Math.Min(l, 1 - l);
         }
 
+        /// <summary>
+        /// Gets the saturation in hsb model.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         internal static double GetSaturation(this Color color)
         {
             var c = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
@@ -85,7 +93,13 @@ namespace WpfColorPicker
             }
         }
 
-        internal static Point Clip(this Point p, FrameworkElement element)
+        /// <summary>
+        /// Clamps the point to the inside of the element
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        internal static Point Clamp(this Point p, FrameworkElement element)
         {
             var pos = Mouse.GetPosition(element);
             pos.X = Math.Min(Math.Max(0, pos.X), element.ActualWidth);

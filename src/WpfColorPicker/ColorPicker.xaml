@@ -22,7 +22,7 @@
                                           Saturation="{Binding Saturation, Mode=TwoWay}"
                                           Brightness="{Binding Brightness, Mode=TwoWay}"/>
         <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="50" Height="{StaticResource height}"
-                        SelectedHue="{Binding Hue, Mode=TwoWay}"/>
+                        Hue="{Binding Hue, Mode=TwoWay}"/>
         <DockPanel>
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>

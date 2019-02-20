@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfColorPicker
 {
     /// <summary>
     /// Interaction logic for HuePicker.xaml
     /// </summary>
-    public partial class HuePicker : UserControl
+    internal partial class HuePicker : UserControl
     {
-        public static readonly DependencyProperty SelectedHueProperty = DependencyProperty.Register(nameof(SelectedHue), typeof(double), typeof(HuePicker), new PropertyMetadata(0.0, OnSelectedHueChanged));
+        public static readonly DependencyProperty HueProperty
+            = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(HuePicker), new PropertyMetadata(0.0, OnHueChanged));
         private readonly HuePickerAdorner _adorner;
 
         public HuePicker()
@@ -31,10 +22,10 @@ namespace WpfColorPicker
             Loaded += HuePickerOnLoaded;
         }
 
-        public double SelectedHue
+        public double Hue
         {
-            get => (double)GetValue(SelectedHueProperty);
-            set => SetValue(SelectedHueProperty, value);
+            get => (double)GetValue(HueProperty);
+            set => SetValue(HueProperty, value);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -48,17 +39,17 @@ namespace WpfColorPicker
 
             Mouse.Capture(this);
 
-            UpdateAdorner(e.GetPosition(this).Clip(this));
+            UpdateAdorner(e.GetPosition(this).Clamp(this));
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             base.OnMouseUp(e);
             Mouse.Capture(null);
-            UpdateAdorner(e.GetPosition(this).Clip(this));
+            UpdateAdorner(e.GetPosition(this).Clamp(this));
         }
 
-        private static void OnSelectedHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnHueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var huePicker = (HuePicker)o;
             huePicker.UpdateAdorner((double)e.NewValue);
@@ -86,11 +77,12 @@ namespace WpfColorPicker
 
             Color c = hueGradients.GradientStops.GetColorAtOffset(verticalPercent);
             _adorner.Color = c;
-            SelectedHue = c.GetHue();
+            Hue = c.GetHue();
         }
 
         private void HuePickerOnLoaded(object sender, RoutedEventArgs e)
         {
+            _adorner.ElementSize = new Rect(new Size(hueRectangle.ActualWidth, hueRectangle.ActualHeight));
             AdornerLayer.GetAdornerLayer(this).Add(_adorner);
         }
     }

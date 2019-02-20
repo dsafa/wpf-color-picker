@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="WpfColorPicker.HuePicker"
+             x:ClassModifier="internal"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,24 +8,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="50"
              Background="Transparent" 
-             Padding="10, 0">
-    <DockPanel SnapsToDevicePixels="True">
-        <Rectangle Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
-                   Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
-                   x:Name="hueRectangle">
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Name="hueGradients">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="#FF0000" Offset="0" />
-                        <GradientStop Color="#FFFF00" Offset="0.167" />
-                        <GradientStop Color="#00FF00" Offset="0.333" />
-                        <GradientStop Color="#00FFFF" Offset="0.5" />
-                        <GradientStop Color="#0000FF" Offset="0.667" />
-                        <GradientStop Color="#FF00FF" Offset="0.833" />
-                        <GradientStop Color="#FF0000" Offset="1" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-    </DockPanel>
+             Padding="10, 0"
+             SnapsToDevicePixels="True">
+    <Rectangle x:Name="hueRectangle">
+        <Rectangle.Fill>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Name="hueGradients">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#FF0000" Offset="0" />
+                    <GradientStop Color="#FFFF00" Offset="0.167" />
+                    <GradientStop Color="#00FF00" Offset="0.333" />
+                    <GradientStop Color="#00FFFF" Offset="0.5" />
+                    <GradientStop Color="#0000FF" Offset="0.667" />
+                    <GradientStop Color="#FF00FF" Offset="0.833" />
+                    <GradientStop Color="#FF0000" Offset="1" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Rectangle.Fill>
+    </Rectangle>
 </UserControl>

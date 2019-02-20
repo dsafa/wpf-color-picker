@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="WpfColorPicker.SaturationBrightnessPicker"
+             x:ClassModifier="internal"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500"
              Background="Black"
-             ClipToBounds="True"
              x:Name="saturationBrightnessPicker"
              SnapsToDevicePixels="True">
     <UserControl.Resources>
