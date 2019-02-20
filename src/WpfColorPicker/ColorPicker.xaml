@@ -7,13 +7,13 @@
              xmlns:converters="clr-namespace:WpfColorPicker.Converters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="380" d:DesignWidth="800"
+             d:DesignHeight="380" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance Type=local:ColorPickerViewModel, IsDesignTimeCreatable=True}"
              x:Name="colorPicker">
     <UserControl.Resources>
         <converters:UnitToPercentConverter x:Key="toPercentConverter"/>
     </UserControl.Resources>
-    <DockPanel >
+    <DockPanel>
         <local:SaturationBrightnessPicker DockPanel.Dock="Left" 
                                           Width="{Binding ElementName=colorPicker, Path=ActualHeight}" 
                                           Hue="{Binding Hue, Mode=OneWay}"
@@ -21,7 +21,7 @@
                                           Brightness="{Binding Brightness, Mode=TwoWay}"/>
         <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left"
                          Width="50" Hue="{Binding Hue, Mode=TwoWay}"/>
-        <DockPanel>
+        <DockPanel HorizontalAlignment="Left">
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -47,7 +47,7 @@
             </Grid>
             <Grid VerticalAlignment="Bottom">
                 <Grid.Resources>
-                    <Style TargetType="{x:Type TextBox}">
+                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
                         <Setter Property="VerticalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                     </Style>

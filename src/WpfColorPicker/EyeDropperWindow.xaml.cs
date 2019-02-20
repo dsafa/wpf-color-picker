@@ -45,11 +45,17 @@ namespace WpfColorPicker
 
         private void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
+            _adorner.Position = Mouse.GetPosition(this);
             AdornerLayer.GetAdornerLayer(windowImage).Add(_adorner);
         }
 
         private void WindowOnMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.ChangedButton != MouseButton.Left)
+            {
+                return;
+            }
+
             DialogResult = true;
             SelectedColor = _adorner.Color;
             Close();

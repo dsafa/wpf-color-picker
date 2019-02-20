@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfColorPicker"
         mc:Ignorable="d"
-        Title="ColorPickerDialog" Height="500" Width="600"
+        Title="ColorPickerDialog" Height="500" Width="580"
         x:Name="dialog"
         SizeToContent="WidthAndHeight">
     <Grid Margin="10">
@@ -27,7 +27,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="30" Height="30" BorderThickness="1" Margin="2">
+                    <Button Width="28" Height="28" BorderThickness="1" Margin="2">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Style.Triggers>
