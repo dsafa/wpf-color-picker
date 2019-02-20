@@ -7,31 +7,29 @@
              xmlns:converters="clr-namespace:WpfColorPicker.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500"
-             x:Name="saturationBrightnessPicker"
              Background="Black"
-             ClipToBounds="True">
+             ClipToBounds="True"
+             x:Name="saturationBrightnessPicker"
+             SnapsToDevicePixels="True">
     <UserControl.Resources>
-        <converters:HueToColorConverter x:Key="hueToColorConverter"/>
+        <converters:HueToColorConverter x:Key="toHue"/>
     </UserControl.Resources>
-    <DockPanel SnapsToDevicePixels="True">
-        <DockPanel.Resources>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="gradientBrush">
+    <Rectangle>
+        <Rectangle.Fill>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                 <LinearGradientBrush.GradientStops>
-                    <GradientStop Color="White" Offset="0" />
-                    <GradientStop x:Name="hue"  Offset="1" 
-                                  Color="{Binding Hue, ElementName=saturationBrightnessPicker, Mode=OneWay, Converter={StaticResource hueToColorConverter}}" />
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Offset="1" Color="{Binding ElementName=saturationBrightnessPicker, Path=Hue, Converter={StaticResource toHue}, Mode=OneWay}"/>
                 </LinearGradientBrush.GradientStops>
             </LinearGradientBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="maskBrush">
+        </Rectangle.Fill>
+        <Rectangle.OpacityMask>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <LinearGradientBrush.GradientStops>
                     <GradientStop Color="#FFFFFFFF" Offset="0"/>
                     <GradientStop Color="#00000000" Offset="1"/>
                 </LinearGradientBrush.GradientStops>
             </LinearGradientBrush>
-        </DockPanel.Resources>
-        <Rectangle Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
-                   Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
-                   Fill="{DynamicResource gradientBrush}" OpacityMask="{StaticResource maskBrush}">
-        </Rectangle>
-    </DockPanel>
+        </Rectangle.OpacityMask>
+    </Rectangle>
 </UserControl>

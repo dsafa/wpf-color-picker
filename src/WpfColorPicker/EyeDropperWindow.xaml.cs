@@ -46,6 +46,7 @@ namespace WpfColorPicker
         {
             if (e.Key == Key.Escape)
             {
+                DialogResult = false;
                 Close();
             }
         }
@@ -58,7 +59,7 @@ namespace WpfColorPicker
         private void WindowOnMouseDown(object sender, MouseButtonEventArgs e)
         {
             DialogResult = true;
-            SelectedColor = GetColorAtPoint(e.GetPosition(this));
+            SelectedColor = _adorner.Color;
             Close();
         }
 

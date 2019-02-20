@@ -21,6 +21,9 @@ namespace WpfColorPicker
         private byte _blue;
         private byte _alpha = 255;
         private bool _dirty;
+        // flags to prevent circular updates
+        private bool _updateFromColor = false;
+        private bool _updateFromComponents = false;
 
         public Color Color
         {
@@ -39,28 +42,12 @@ namespace WpfColorPicker
                 }
 
                 _color = value;
-
-
-                _red = _color.R;
-                _green = _color.G;
-                _blue = _color.B;
-                _alpha = _color.A;
-
-                OnPropertyChanged(nameof(Red));
-                OnPropertyChanged(nameof(Green));
-                OnPropertyChanged(nameof(Blue));
-                OnPropertyChanged(nameof(Alpha));
-
-                _hue = _color.GetHue();
-                _saturation = _color.GetSaturation();
-                _brightness = _color.GetBrightness();
-
-                OnPropertyChanged(nameof(Hue));
-                OnPropertyChanged(nameof(LateBindHue));
-                OnPropertyChanged(nameof(Saturation));
-                OnPropertyChanged(nameof(Brightness));
-
                 OnPropertyChanged();
+
+                if (!_updateFromComponents)
+                {
+                    UpdateComponents();
+                }
             }
         }
 
@@ -91,14 +78,12 @@ namespace WpfColorPicker
 
                 _hue = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(LateBindHue));
-                UpdateRGB();
-            }
-        }
 
-        public double LateBindHue
-        {
-            get => _hue;
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromHSB();
+                }
+            }
         }
 
         public double Saturation
@@ -113,7 +98,11 @@ namespace WpfColorPicker
 
                 _saturation = value;
                 OnPropertyChanged();
-                UpdateRGB();
+
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromHSB();
+                }
             }
         }
 
@@ -129,7 +118,11 @@ namespace WpfColorPicker
 
                 _brightness = value;
                 OnPropertyChanged();
-                UpdateRGB();
+
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromHSB();
+                }
             }
         }
 
@@ -145,7 +138,11 @@ namespace WpfColorPicker
 
                 _red = value;
                 OnPropertyChanged();
-                UpdateHSB();
+
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromRGB();
+                }
             }
         }
 
@@ -161,7 +158,11 @@ namespace WpfColorPicker
 
                 _green = value;
                 OnPropertyChanged();
-                UpdateHSB();
+
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromRGB();
+                }
             }
         }
 
@@ -177,7 +178,11 @@ namespace WpfColorPicker
 
                 _blue = value;
                 OnPropertyChanged();
-                UpdateHSB();
+
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromRGB();
+                }
             }
         }
 
@@ -193,7 +198,11 @@ namespace WpfColorPicker
 
                 _alpha = value;
                 OnPropertyChanged();
-                UpdateHSB();
+                
+                if (!_updateFromColor && !_updateFromComponents)
+                {
+                    UpdateColorFromRGB();
+                }
             }
         }
 
@@ -204,32 +213,46 @@ namespace WpfColorPicker
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
         }
 
-        private void UpdateRGB()
+        private void UpdateColorFromRGB()
         {
-            _color = ColorHelper.FromHSV(Hue, Saturation, Brightness);
-            _color = Color.FromArgb(Alpha, _color.R, _color.G, _color.B);
-            _red = _color.R;
-            _green = _color.G;
-            _blue = _color.B;
-
-            OnPropertyChanged(nameof(Red));
-            OnPropertyChanged(nameof(Green));
-            OnPropertyChanged(nameof(Blue));
-            OnPropertyChanged(nameof(Color));
+            // when rgb changes, update hsb
+            _updateFromComponents = true;
+            Color = Color.FromArgb(Alpha, Red, Green, Blue);
+            Hue = Color.GetHue();
+            Saturation = Color.GetSaturation();
+            Brightness = Color.GetBrightness();
+            _updateFromComponents = false;
         }
 
-        private void UpdateHSB()
+        private void UpdateColorFromHSB()
         {
-            _color = Color.FromArgb(Alpha, Red, Green, Blue);
-            _hue = _color.GetHue();
-            _saturation = _color.GetSaturation();
-            _brightness = _color.GetBrightness();
+            // when hsb changes, update rgb
+            _updateFromComponents = true;
+            var c = ColorHelper.FromHSV(Hue, Saturation, Brightness);
+            c.A = Alpha;
 
-            OnPropertyChanged(nameof(Hue));
-            OnPropertyChanged(nameof(LateBindHue));
-            OnPropertyChanged(nameof(Saturation));
-            OnPropertyChanged(nameof(Brightness));
-            OnPropertyChanged(nameof(Color));
+            Color = c;
+            Red = Color.R;
+            Green = Color.G;
+            Blue = Color.B;
+            _updateFromComponents = false;
+        }
+
+        private void UpdateComponents()
+        {
+            // when color changes, update hsb and rgb
+            _updateFromColor = true;
+
+            Red = Color.R;
+            Green = Color.G;
+            Blue = Color.B;
+            Alpha = Color.A;
+
+            Hue = Color.GetHue();
+            Saturation = Color.GetSaturation();
+            Brightness = Color.GetBrightness();
+
+            _updateFromColor = false;
         }
     }
 }

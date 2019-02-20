@@ -15,10 +15,12 @@
         <sys:Double x:Key="height">380</sys:Double>
     </UserControl.Resources>
     <DockPanel Height="{StaticResource height}">
-        <local:SaturationBrightnessPicker DockPanel.Dock="Left" Width="{StaticResource height}" Height="{StaticResource height}"
-                                              Brightness="{Binding Brightness, Mode=TwoWay}"
-                                              Saturation="{Binding Saturation, Mode=TwoWay}"
-                                              Hue="{Binding LateBindHue, Mode=OneWay}"/>
+        <local:SaturationBrightnessPicker DockPanel.Dock="Left" 
+                                          Width="{StaticResource height}" 
+                                          Height="{StaticResource height}"
+                                          Hue="{Binding Hue, Mode=OneWay}"
+                                          Saturation="{Binding Saturation, Mode=TwoWay}"
+                                          Brightness="{Binding Brightness, Mode=TwoWay}"/>
         <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="50" Height="{StaticResource height}"
                         SelectedHue="{Binding Hue, Mode=TwoWay}"/>
         <DockPanel>
