@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfColorPicker"
         mc:Ignorable="d"
         Title="ColorPickerDialog" Height="500" Width="600"
+        x:Name="dialog"
         SizeToContent="WidthAndHeight">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -17,10 +18,50 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <local:ColorPicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="colorPicker"/>
-        <WrapPanel Grid.Row="2" Grid.Column="0">
-                
-        </WrapPanel>
+        <local:ColorPicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="colorPicker" Height="360"/>
+        <ItemsControl Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ElementName=dialog, Path=Palette}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="30" Height="30" BorderThickness="1" Margin="2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="BorderThickness" Value="3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Button.Background>
+                            <SolidColorBrush Color="{Binding .}"/>
+                        </Button.Background>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
                     HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Content="Ok" Width="60"/>

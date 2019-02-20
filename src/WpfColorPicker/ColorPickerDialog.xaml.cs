@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,9 +21,17 @@ namespace WpfColorPicker
     /// </summary>
     public partial class ColorPickerDialog : Window
     {
+        private static readonly ObservableCollection<Color> DefaultPalette = new ObservableCollection<Color>(new Color[] {
+            Colors.Black, Colors.Gray, Colors.White, Colors.Red, Colors.Orange, Colors.Yellow, Colors.Green, Colors.Blue, Colors.Indigo, Colors.Magenta,
+            Colors.Purple, Colors.DarkRed, Colors.DarkOrange, Colors.DarkGreen, Colors.DarkBlue, Colors.DarkMagenta, Colors.MediumPurple,
+            Colors.LightGreen, Colors.LightBlue
+        });
+
         public ColorPickerDialog()
         {
             InitializeComponent();
         }
+
+        public ObservableCollection<Color> Palette { get; } = new ObservableCollection<Color>(DefaultPalette);
     }
 }

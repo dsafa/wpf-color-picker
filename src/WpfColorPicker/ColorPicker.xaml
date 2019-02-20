@@ -7,22 +7,20 @@
              xmlns:converters="clr-namespace:WpfColorPicker.Converters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800"
+             d:DesignHeight="380" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=local:ColorPickerViewModel, IsDesignTimeCreatable=True}"
              x:Name="colorPicker">
     <UserControl.Resources>
         <converters:UnitToPercentConverter x:Key="toPercentConverter"/>
-        <sys:Double x:Key="height">380</sys:Double>
     </UserControl.Resources>
-    <DockPanel Height="{StaticResource height}">
+    <DockPanel >
         <local:SaturationBrightnessPicker DockPanel.Dock="Left" 
-                                          Width="{StaticResource height}" 
-                                          Height="{StaticResource height}"
+                                          Width="{Binding ElementName=colorPicker, Path=ActualHeight}" 
                                           Hue="{Binding Hue, Mode=OneWay}"
                                           Saturation="{Binding Saturation, Mode=TwoWay}"
                                           Brightness="{Binding Brightness, Mode=TwoWay}"/>
-        <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left" Width="50" Height="{StaticResource height}"
-                        Hue="{Binding Hue, Mode=TwoWay}"/>
+        <local:HuePicker DockPanel.Dock="Left" Margin="10, 0" HorizontalAlignment="Left"
+                         Width="50" Hue="{Binding Hue, Mode=TwoWay}"/>
         <DockPanel>
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
