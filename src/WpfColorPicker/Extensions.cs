@@ -51,8 +51,8 @@ namespace WpfColorPicker
         /// <summary>
         /// Gets hue in hsb model.
         /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
+        /// <param name="color">The color.</param>
+        /// <returns>The hue of the color from [0, 360]</returns>
         internal static double GetHue(this Color color)
         {
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B).GetHue();
@@ -61,10 +61,11 @@ namespace WpfColorPicker
         /// <summary>
         /// Gets the brightness in hsb model.
         /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
+        /// <param name="color">The color.</param>
+        /// <returns>The brightness of the color from [0, 1]</returns>
         internal static double GetBrightness(this Color color)
         {
+            // HSL to HSB conversion
             var c = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
             var hslSat = c.GetSaturation();
             var l = c.GetBrightness(); // actaully luminance
@@ -75,10 +76,11 @@ namespace WpfColorPicker
         /// <summary>
         /// Gets the saturation in hsb model.
         /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
+        /// <param name="color">The color</param>
+        /// <returns>The saturation of the color from [0, 1]</returns>
         internal static double GetSaturation(this Color color)
         {
+            // HSL to HSB conversion
             var c = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
             var l = c.GetBrightness();
             var b = GetBrightness(color);
@@ -96,9 +98,9 @@ namespace WpfColorPicker
         /// <summary>
         /// Clamps the point to the inside of the element
         /// </summary>
-        /// <param name="p"></param>
-        /// <param name="element"></param>
-        /// <returns></returns>
+        /// <param name="p">The point</param>
+        /// <param name="element">The element</param>
+        /// <returns>A point inside the element</returns>
         internal static Point Clamp(this Point p, FrameworkElement element)
         {
             var pos = Mouse.GetPosition(element);

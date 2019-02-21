@@ -6,12 +6,15 @@ using System.Windows.Media;
 namespace WpfColorPicker
 {
     /// <summary>
-    /// Interaction logic for ColorPicker.xaml
+    /// User control that contains a color picker.
     /// </summary>
     public partial class ColorPicker : UserControl
     {
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Colors.Red, OnColorChanged));
 
+        /// <summary>
+        /// Creates an instance of the color picker.
+        /// </summary>
         public ColorPicker()
         {
             var vm = new ColorPickerViewModel();
@@ -20,6 +23,9 @@ namespace WpfColorPicker
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets or sets the currently selected color.
+        /// </summary>
         public Color Color
         {
             get => (Color)GetValue(ColorProperty);

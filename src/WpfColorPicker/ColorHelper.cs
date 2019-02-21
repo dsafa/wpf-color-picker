@@ -6,7 +6,7 @@ namespace WpfColorPicker
     internal static class ColorHelper
     {
         /// <summary>
-        /// Creates a color from HSV values.
+        /// Creates a color from HSV / HSB values.
         /// </summary>
         /// <param name="h">Hue, [0 - 360]</param>
         /// <param name="s">Saturation, [0, 1]</param>
