@@ -81,7 +81,7 @@ namespace WpfColorPicker
         private void SaturationBrightnessPickerOnLoaded(object sender, RoutedEventArgs e)
         {
             AdornerLayer.GetAdornerLayer(this).Add(_adorner);
-            _adorner.Position = new Point(ActualWidth, 0);
+            _adorner.Position = new Point(Saturation * ActualWidth, (1 - Brightness) * ActualHeight);
         }
 
         private void Update(Point p)

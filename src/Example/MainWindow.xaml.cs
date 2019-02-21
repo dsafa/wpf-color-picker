@@ -24,7 +24,7 @@ namespace Example
     public partial class MainWindow : Window
     {
         public static DependencyProperty ColorProperty
-            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(MainWindow), new PropertyMetadata(Colors.Black));
+            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(MainWindow), new PropertyMetadata(Colors.BlueViolet));
 
         public MainWindow()
         {
