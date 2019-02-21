@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfColorPicker"
         mc:Ignorable="d"
-        Title="ColorPickerDialog" Height="500" Width="580"
+        Title="Choose a color" Height="500" Width="580"
         x:Name="dialog"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="SingleBorderWindow">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding ElementName=colorPicker, Path=ActualHeight}"/>

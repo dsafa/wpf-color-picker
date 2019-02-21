@@ -40,6 +40,7 @@ namespace Example
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ColorPickerDialog(Color);
+            dialog.Owner = this;
             var res = dialog.ShowDialog();
             if (res.HasValue && res.Value)
             {
