@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     internal static class ColorHelper
     {

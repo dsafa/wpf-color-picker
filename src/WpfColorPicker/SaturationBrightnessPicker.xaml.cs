@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     internal partial class SaturationBrightnessPicker : UserControl
     {

@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     /// <summary>
     /// Interaction logic for EyeDropperWindow.xaml

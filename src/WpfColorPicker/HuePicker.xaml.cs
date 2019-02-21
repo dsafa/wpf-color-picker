@@ -4,7 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     /// <summary>
     /// Interaction logic for HuePicker.xaml

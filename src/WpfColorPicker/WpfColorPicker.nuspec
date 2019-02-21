@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>dsafa.WpfColorPicker</id>
+    <id>Dsafa.WpfColorPicker</id>
     <version>$version$</version>
     <title>Standalone WPF color picker</title>
     <authors>dsafa</authors>

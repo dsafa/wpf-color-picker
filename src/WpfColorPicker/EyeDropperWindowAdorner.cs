@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     internal class EyeDropperWindowAdorner : Adorner
     {

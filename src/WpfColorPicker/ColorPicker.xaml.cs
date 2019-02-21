@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     /// <summary>
     /// User control that contains a color picker.

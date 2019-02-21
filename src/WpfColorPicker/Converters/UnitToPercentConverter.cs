@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace WpfColorPicker.Converters
+namespace Dsafa.WpfColorPicker.Converters
 {
     /// <summary>
     /// Converts from range [0 - 1] to percent

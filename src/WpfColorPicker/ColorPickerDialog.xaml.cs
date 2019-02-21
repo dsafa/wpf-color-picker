@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     /// <summary>
     /// Window that contains a <see cref="ColorPicker"/> and a color palette.

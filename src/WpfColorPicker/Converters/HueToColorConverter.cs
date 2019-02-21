@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace WpfColorPicker.Converters
+namespace Dsafa.WpfColorPicker.Converters
 {
     /// <summary>
     /// Converts hue [0 - 360] to color.

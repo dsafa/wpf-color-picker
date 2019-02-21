@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WpfColorPicker
+namespace Dsafa.WpfColorPicker
 {
     /// <summary>
     /// Interaction logic for NumericInput.xaml
