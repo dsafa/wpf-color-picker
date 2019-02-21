@@ -4,13 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfColorPicker"
+             xmlns:converters="clr-namespace:WpfColorPicker.Converters"
              mc:Ignorable="d" 
              x:ClassModifier="internal"
              d:DesignHeight="30" d:DesignWidth="100"
              x:Name="numericInput"
              VerticalAlignment="Stretch">
-    <TextBox HorizontalContentAlignment="Right"
-             PreviewTextInput="TextBoxOnPreviewTextInput"
-             VerticalAlignment="Stretch" VerticalContentAlignment="Center"
-             Text="{Binding Value, ElementName=numericInput}"/>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalContentAlignment="Right" Grid.Column="0"
+                Padding="0,0,20,0"
+                PreviewTextInput="TextBoxOnPreviewTextInput"
+                VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                Background="Transparent"
+                Text="{Binding ElementName=numericInput, Path=Value, Mode=TwoWay, ValidatesOnExceptions=True}">
+        </TextBox>
+        <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+              Margin="-24,0,0,0" Cursor="ScrollNS" x:Name="scroller"
+              Background="Transparent">
+            <Viewbox>
+                <Path Data="M12,18.17L8.83,15L7.42,16.41L12,21L16.59,16.41L15.17,15M12,5.83L15.17,9L16.58,7.59L12,3L7.41,7.59L8.83,9L12,5.83Z" 
+                Fill="{Binding ElementName=numericInput, Path=Foreground}" Width="24" Height="24"/>
+            </Viewbox>
+        </Grid>
+    </Grid>
 </UserControl>
