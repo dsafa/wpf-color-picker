@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfColorPicker"
-             xmlns:converters="clr-namespace:WpfColorPicker.Converters"
+             xmlns:rules="clr-namespace:WpfColorPicker.ValidationRules"
              mc:Ignorable="d" 
              x:ClassModifier="internal"
              d:DesignHeight="30" d:DesignWidth="100"
@@ -15,12 +15,27 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox HorizontalContentAlignment="Left" Grid.Column="0"
+        <TextBox Grid.Column="0" HorizontalContentAlignment="Left"
                 Padding="0,0,20,0"
                 PreviewTextInput="TextBoxOnPreviewTextInput"
                 VerticalAlignment="Stretch" VerticalContentAlignment="Center"
-                Background="Transparent"
-                Text="{Binding ElementName=numericInput, Path=Value, Mode=TwoWay, ValidatesOnExceptions=True}">
+                Background="Transparent">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="ToolTip" Value="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Resources>
+            <TextBox.Text>
+                <Binding ElementName="numericInput" Path="Value" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <rules:ColorNumericInputValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
         <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
               Margin="-20,0,0,0" Cursor="ScrollNS" x:Name="scroller"
