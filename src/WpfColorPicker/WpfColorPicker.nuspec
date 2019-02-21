@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>dsafa.WpfColorPicker</id>
+    <version>$version$</version>
+    <title>Standalone WPF color picker</title>
+    <authors>dsafa</authors>
+    <owners>dsafa</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/dsafa/wpf-color-picker</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Color picker for WPF</description>
+    <copyright>Copyright 2019</copyright>
+    <tags>color picker</tags>
+  </metadata>
+</package>
