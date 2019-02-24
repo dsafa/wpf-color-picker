@@ -23,7 +23,7 @@ namespace Dsafa.WpfColorPicker
             {
                 double k = (n + h / 60) % 6;
                 double value = v - v * s * Math.Max(Math.Min(Math.Min(k, 4 - k), 1), 0);
-                return (byte)(value * 255);
+                return (byte)Math.Round(value * 255);
             }
 
             return Color.FromRgb(f(5), f(3), f(1));
