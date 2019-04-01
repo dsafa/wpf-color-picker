@@ -13,12 +13,12 @@ Standalone Wpf color picker
 ## Usage
 1. Create the instance of the dialog
 ```cs
-var dialog = new ColorPickerDialog();
+var initialColor = Colors.Blue;
+var dialog = new ColorPickerDialog(initialColor);
 ```
 2. Show the dialog
 ```cs
-var initialColor = Colors.Blue;
-var result = dialog.ShowDialog(initialColor);
+var result = dialog.ShowDialog();
 ```
 3. Check the dialog results and get the color
 ```cs
