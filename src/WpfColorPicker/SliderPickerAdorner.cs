@@ -4,16 +4,16 @@ using System.Windows.Media;
 
 namespace Dsafa.WpfColorPicker
 {
-    internal class HuePickerAdorner : Adorner
+    internal class SliderPickerAdorner : Adorner
     {
         private static readonly DependencyProperty VerticalPercentProperty 
-            = DependencyProperty.Register(nameof(VerticalPercent), typeof(double), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+            = DependencyProperty.Register(nameof(VerticalPercent), typeof(double), typeof(SliderPickerAdorner), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
         private static readonly DependencyProperty ColorProperty
-            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HuePickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
+            = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(SliderPickerAdorner), new FrameworkPropertyMetadata(Colors.Red, FrameworkPropertyMetadataOptions.AffectsRender));
         private static readonly Pen Pen = new Pen(Brushes.Black, 1);
         private Brush _brush = Brushes.Red;
 
-        public HuePickerAdorner(UIElement adornedElement)
+        public SliderPickerAdorner(UIElement adornedElement)
             : base(adornedElement)
         {
             IsHitTestVisible = false;
@@ -42,7 +42,7 @@ namespace Dsafa.WpfColorPicker
             base.OnRender(drawingContext);
             var width = 10;
             var y = ElementSize.Height * VerticalPercent;
-            var x = -width;
+            var x = 5;
 
             var triangleGeometry = new StreamGeometry();
             using (var context = triangleGeometry.Open())
