@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Dsafa.WpfColorPicker.HuePicker"
+﻿<local:SliderPicker x:Class="Dsafa.WpfColorPicker.HuePicker"
              x:ClassModifier="internal"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,7 +10,7 @@
              Background="Transparent" 
              Padding="10, 0"
              SnapsToDevicePixels="True">
-    <Rectangle x:Name="hueRectangle">
+    <Rectangle>
         <Rectangle.Fill>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Name="hueGradients">
                 <LinearGradientBrush.GradientStops>
@@ -25,4 +25,4 @@
             </LinearGradientBrush>
         </Rectangle.Fill>
     </Rectangle>
-</UserControl>
+</local:SliderPicker>
