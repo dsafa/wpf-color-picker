@@ -59,6 +59,7 @@
       <DependentUpon>ColorPickerDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="ColorPickerViewModel.cs" />
+    <Compile Include="Converters\ColorToSolidConverter.cs" />
     <Compile Include="Converters\HueToColorConverter.cs" />
     <Compile Include="Converters\UnitToPercentConverter.cs" />
     <Compile Include="Extensions.cs" />
@@ -72,7 +73,8 @@
     <Compile Include="HuePicker.xaml.cs">
       <DependentUpon>HuePicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HuePickerAdorner.cs" />
+    <Compile Include="SliderPicker.cs" />
+    <Compile Include="SliderPickerAdorner.cs" />
     <Compile Include="ColorNumericInput.xaml.cs">
       <DependentUpon>ColorNumericInput.xaml</DependentUpon>
     </Compile>
@@ -93,6 +95,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SaturationBrightnessPickerAdorner.cs" />
+    <Compile Include="TransparencyPicker.xaml.cs">
+      <DependentUpon>TransparencyPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\ColorNumericInputValidationRule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -128,7 +133,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\StaticBrushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SaturationBrightnessPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransparencyPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
