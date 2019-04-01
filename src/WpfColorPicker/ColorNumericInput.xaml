@@ -38,7 +38,7 @@
             </TextBox.Text>
         </TextBox>
         <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-              Margin="-20,0,0,0" Cursor="ScrollNS" x:Name="scroller"
+              Margin="-20,0,0,0" Cursor="SizeNS" x:Name="scroller"
               Background="Transparent">
             <Viewbox Margin="0, 4">
                 <Path Data="M12,18.17L8.83,15L7.42,16.41L12,21L16.59,16.41L15.17,15M12,5.83L15.17,9L16.58,7.59L12,3L7.41,7.59L8.83,9L12,5.83Z" 
