@@ -33,16 +33,20 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Content="Current Color"/>
-                <Rectangle Grid.Row="1">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding OldColor, Mode=OneWay}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle Grid.Row="2">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding Color, Mode=OneWay}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1, 1, 1, 0">
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding OldColor, Mode=OneWay}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Border>
+                <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1, 0, 1, 1">
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding Color, Mode=OneWay}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Border>
                 <Label Grid.Row="3" Content="New Color"/>
             </Grid>
             <Grid VerticalAlignment="Bottom">
