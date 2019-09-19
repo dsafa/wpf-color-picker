@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="EyeDropperWindow"
         ResizeMode="NoResize"
-        WindowState="Maximized" WindowStyle="None"
+        WindowStyle="None"
         KeyDown="WindowOnKeyDown"
         Loaded="WindowOnLoaded"
         MouseDown="WindowOnMouseDown">
