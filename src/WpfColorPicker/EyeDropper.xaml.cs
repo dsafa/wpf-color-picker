@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using WpfScreenHelper;
 using Color = System.Windows.Media.Color;
 
 namespace Dsafa.WpfColorPicker
@@ -26,9 +27,9 @@ namespace Dsafa.WpfColorPicker
             set => SetValue(SelectedColorProperty, value);
         }
 
-        public static Rectangle CurrentScreenRect()
+        public static Rect CurrentScreenRect()
         {
-            return System.Windows.Forms.Screen.FromPoint(System.Windows.Forms.Cursor.Position).Bounds;
+            return Screen.FromPoint(MouseHelper.MousePosition).Bounds;
         }
 
         private void ButtonOnClick(object sender, RoutedEventArgs e)
@@ -40,11 +41,11 @@ namespace Dsafa.WpfColorPicker
             {
                 // Changing the screen rect and image unfortunately causes a short flash of the old
                 // image on the new screen. To circumvent this issue, we first set the window to be
-                // invisible (with a size of 0x0.
+                // invisible (with a size of 0x0).
                 // This is not ideal but makes the issue less noticable. Actually hiding the window
                 // seems to work better but we can't do that because calling `.Hide()` or setting
                 // `.Visibility` sets the `DialogResult` to `false`.
-                window.SetScreenRect(new Rectangle(0, 0, 0, 0));
+                window.SetScreenRect(new Rect(0, 0, 0, 0));
                 window.SetImage(ScreenshotBitmapImage());
                 window.SetScreenRect(CurrentScreenRect());
             };
@@ -79,11 +80,11 @@ namespace Dsafa.WpfColorPicker
 
         private Bitmap TakeScreenshot()
         {
-            Rectangle screen = CurrentScreenRect();
-            var screenBitmap = new Bitmap(screen.Width, screen.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            Rect screen = CurrentScreenRect();
+            var screenBitmap = new Bitmap((int)screen.Width, (int)screen.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             using (var g = Graphics.FromImage(screenBitmap))
             {
-                g.CopyFromScreen(screen.Left, screen.Top, 0, 0, screenBitmap.Size);
+                g.CopyFromScreen((int)screen.Left, (int)screen.Top, 0, 0, screenBitmap.Size);
             }
 
             return screenBitmap;

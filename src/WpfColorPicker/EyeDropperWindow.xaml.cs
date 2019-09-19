@@ -24,7 +24,7 @@ namespace Dsafa.WpfColorPicker
 
         public Color SelectedColor { get; private set; }
 
-        public void SetScreenRect(System.Drawing.Rectangle screenRect)
+        public void SetScreenRect(Rect screenRect)
         {
             // Apparently, the window cannot be maximized when we want to move it to a different screen.
             // Thanks to: http://www.codewrecks.com/blog/index.php/2013/01/05/open-a-window-in-fullscreen-on-a-specific-monitor-in-wpf/
