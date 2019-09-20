@@ -13,17 +13,33 @@ namespace Dsafa.WpfColorPicker
     internal partial class EyeDropperWindow : Window
     {
         private readonly EyeDropperWindowAdorner _adorner;
-        private readonly BitmapImage _image;
+        private BitmapImage _image;
 
         public EyeDropperWindow(BitmapImage image)
         {
             InitializeComponent();
-            windowImage.Source = image;
-            _image = image;
+            SetImage(image);
             _adorner = new EyeDropperWindowAdorner(windowImage);
         }
 
         public Color SelectedColor { get; private set; }
+
+        public void SetScreenRect(Rect screenRect)
+        {
+            // Apparently, the window cannot be maximized when we want to move it to a different screen.
+            // Thanks to: http://www.codewrecks.com/blog/index.php/2013/01/05/open-a-window-in-fullscreen-on-a-specific-monitor-in-wpf/
+            WindowState = WindowState.Normal;
+            Left = screenRect.Left;
+            Top = screenRect.Top;
+            Width = screenRect.Width;
+            Height = screenRect.Height;
+        }
+
+        public void SetImage(BitmapImage image)
+        {
+            windowImage.Source = image;
+            _image = image;
+        }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
