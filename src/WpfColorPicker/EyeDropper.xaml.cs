@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using WpfScreenHelper;
 using Color = System.Windows.Media.Color;
 
 namespace Dsafa.WpfColorPicker
@@ -26,7 +27,37 @@ namespace Dsafa.WpfColorPicker
             set => SetValue(SelectedColorProperty, value);
         }
 
+        public static Rect CurrentScreenRect()
+        {
+            return Screen.FromPoint(MouseHelper.MousePosition).Bounds;
+        }
+
         private void ButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new EyeDropperWindow(ScreenshotBitmapImage());
+            // The EyeDropperWindow spans the entire current screen, so this event gets called whenever
+            // the mouse changes from one screen to another.
+            window.MouseLeave += (_s, _e) =>
+            {
+                // Changing the screen rect and image unfortunately causes a short flash of the old
+                // image on the new screen. To circumvent this issue, we first set the window to be
+                // invisible (with a size of 0x0).
+                // This is not ideal but makes the issue less noticable. Actually hiding the window
+                // seems to work better but we can't do that because calling `.Hide()` or setting
+                // `.Visibility` sets the `DialogResult` to `false`.
+                window.SetScreenRect(new Rect(0, 0, 0, 0));
+                window.SetImage(ScreenshotBitmapImage());
+                window.SetScreenRect(CurrentScreenRect());
+            };
+            window.SetScreenRect(CurrentScreenRect());
+            var res = window.ShowDialog();
+            if (res.HasValue && res.Value)
+            {
+                SelectedColor = window.SelectedColor;
+            }
+        }
+
+        private BitmapImage ScreenshotBitmapImage()
         {
             var screenshot = TakeScreenshot();
 
@@ -44,20 +75,16 @@ namespace Dsafa.WpfColorPicker
 
             screenshot.Dispose();
 
-            var window = new EyeDropperWindow(bitmapImage);
-            var res = window.ShowDialog();
-            if (res.HasValue && res.Value)
-            {
-                SelectedColor = window.SelectedColor;
-            }
+            return bitmapImage;
         }
 
         private Bitmap TakeScreenshot()
         {
-            var screenBitmap = new Bitmap((int)SystemParameters.PrimaryScreenWidth, (int)SystemParameters.PrimaryScreenHeight, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            Rect screen = CurrentScreenRect();
+            var screenBitmap = new Bitmap((int)screen.Width, (int)screen.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             using (var g = Graphics.FromImage(screenBitmap))
             {
-                g.CopyFromScreen(0, 0, 0, 0, screenBitmap.Size);
+                g.CopyFromScreen((int)screen.Left, (int)screen.Top, 0, 0, screenBitmap.Size);
             }
 
             return screenBitmap;
