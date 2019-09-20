@@ -12,5 +12,8 @@
     <description>Color picker for WPF</description>
     <copyright>Copyright 2019</copyright>
     <tags>color picker</tags>
+    <dependencies>
+      <dependency id="WpfScreenHelper" version="0.3.0.0" />
+    </dependencies>
   </metadata>
 </package>
